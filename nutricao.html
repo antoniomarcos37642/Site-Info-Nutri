@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Site informativo sobre nutrição, alimentação saudável e dicas para uma vida mais equilibrada">
+    <title>Nutrição Saudável - Guia Completo de Alimentação</title>
+    <link rel="stylesheet" href="nutricao.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+
+    .quick-nav-btn {
+        position: relative;
+        background: linear-gradient(135deg, #2d5a27 0%, #4a7c59 50%, #2a9d8f 100%);
+        color: #fff;
+        border: none;
+        border-radius: 12px;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 
+            0 4px 15px rgba(45, 90, 39, 0.3),
+            0 0 0 1px rgba(255, 255, 255, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        cursor: pointer;
+        font-size: 20px;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        backdrop-filter: blur(15px);
+        border: 2px solid rgba(255, 255, 255, 0.15);
+        overflow: hidden;
+    }
+    
+    
+    .quick-nav-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: left 0.6s ease;
+    }
+    
+    .quick-nav-btn:hover::before {
+        left: 100%;
+    }
+    
+    
+    .quick-nav-btn::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 4px;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        animation: floatParticle 3s ease-in-out infinite;
+    }
+    
+    @keyframes floatParticle {
+        0%, 100% {
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+        }
+        50% {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+    }
+    
+    .quick-nav-btn:hover {
+        background: linear-gradient(135deg, #1e3d1a 0%, #2d5a27 50%, #1a3d1a 100%);
+        transform: translateY(-2px) scale(1.05);
+        box-shadow: 
+            0 8px 25px rgba(45, 90, 39, 0.4),
+            0 0 0 2px rgba(255, 255, 255, 0.2),
+            inset 0 2px 0 rgba(255, 255, 255, 0.3);
+    }
+    
+    .quick-nav-btn:active {
+        transform: translateY(0) scale(0.98);
+        box-shadow: 
+            0 4px 15px rgba(45, 90, 39, 0.3),
+            0 0 0 1px rgba(255, 255, 255, 0.3);
+    }
+    
+    .quick-nav-btn i {
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        z-index: 2;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    .quick-nav-btn:hover i {
+        transform: rotate(90deg) scale(1.1);
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    
+    .quick-nav-btn:hover::after {
+        animation: ripple 0.6s ease-out;
+    }
+    
+    @keyframes ripple {
+        0% {
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 1;
+        }
+        100% {
+            transform: translate(-50%, -50%) scale(4);
+            opacity: 0;
+        }
+    }
+    
+    .quick-nav-btn.clicked {
+        animation: clickRipple 0.6s ease-out;
+    }
+    
+    @keyframes clickRipple {
+        0% {
+            transform: scale(1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        50% {
+            transform: scale(1.2);
+            box-shadow: 0 8px 30px rgba(39, 174, 96, 0.6);
+        }
+        100% {
+            transform: scale(1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+    }
+    .quick-nav-panel {
+        position: absolute;
+        right: 0;
+        top: calc(100% + 8px);
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.9) 100%);
+        backdrop-filter: blur(25px);
+        border-radius: 16px;
+        padding: 20px;
+        box-shadow: 
+            0 25px 50px rgba(0, 0, 0, 0.15),
+            0 0 0 1px rgba(255, 255, 255, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+        z-index: 1000;
+        min-width: 220px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        opacity: 0;
+        transform: translateY(-15px) scale(0.9);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        overflow: hidden;
+    }
+    
+    
+    .quick-nav-panel::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+    }
+    
+    .quick-nav-panel.show {
+        opacity: 1;
+        transform: translateY(0) scale(1); 
+    }
+    .quick-nav-panel a { 
+        color: #2c3e50; 
+        text-decoration: none; 
+        padding: 14px 18px; 
+        border-radius: 12px; 
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        font-weight: 600;
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        position: relative;
+        overflow: hidden;
+        transform: none; 
+        background: rgba(255, 255, 255, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+    }
+    
+    .quick-nav-panel a::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(45, 90, 39, 0.1), transparent);
+        transition: left 0.5s ease;
+    }
+    
+    .quick-nav-panel a:hover::before {
+        left: 100%;
+    }
+    
+    .quick-nav-panel a:hover { 
+        background: linear-gradient(135deg, rgba(45, 90, 39, 0.15), rgba(74, 124, 89, 0.15), rgba(42, 157, 143, 0.1));
+        color: #2d5a27;
+        transform: translateX(8px) scale(1.02); 
+        box-shadow: 
+            0 8px 20px rgba(45, 90, 39, 0.2),
+            0 0 0 1px rgba(45, 90, 39, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        border-radius: 12px; 
+        border-color: rgba(45, 90, 39, 0.2);
+    }
+    
+    .quick-nav-panel a i {
+        font-size: 18px;
+        width: 22px;
+        text-align: center;
+        transition: all 0.3s ease;
+        color: #2d5a27;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+    
+    .quick-nav-panel a:hover i {
+        transform: scale(1.1) rotate(5deg);
+        color: #1e3d1a;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    .quick-nav-close { 
+        align-self: flex-end; 
+        font-size: 22px; 
+        color: #7f8c8d; 
+        cursor: pointer; 
+        padding: 10px; 
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border-radius: 12px;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 10px;
+        transform: none; 
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .quick-nav-close::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: left 0.5s ease;
+    }
+    
+    .quick-nav-close:hover::before {
+        left: 100%;
+    }
+    
+    .quick-nav-close:hover {
+        color: #e74c3c;
+        background: linear-gradient(135deg, rgba(231, 76, 60, 0.15), rgba(231, 76, 60, 0.1));
+        transform: scale(1.1);
+        border-radius: 12px; 
+        box-shadow: 
+            0 6px 15px rgba(231, 76, 60, 0.2),
+            0 0 0 1px rgba(231, 76, 60, 0.1);
+        border-color: rgba(231, 76, 60, 0.2);
+    }
+    
+    @keyframes pulse {
+        0% {
+            box-shadow: 
+                0 8px 25px rgba(45, 90, 39, 0.3),
+                0 0 0 0px rgba(45, 90, 39, 0.1);
+        }
+        50% {
+            box-shadow: 
+                0 12px 35px rgba(45, 90, 39, 0.5),
+                0 0 0 15px rgba(45, 90, 39, 0.1),
+                0 0 0 30px rgba(45, 90, 39, 0.05);
+        }
+        100% {
+            box-shadow: 
+                0 8px 25px rgba(45, 90, 39, 0.3),
+                0 0 0 0px rgba(45, 90, 39, 0.1);
+        }
+    }
+    
+    .quick-nav-btn.pulse {
+        animation: pulse 2.5s infinite;
+    }
+    
+   
+    @keyframes slideInFromTop {
+        0% {
+            opacity: 0;
+            transform: translateY(-20px) scale(0.8);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+    
+    .quick-nav-panel.show {
+        animation: slideInFromTop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+   
+    @media (max-width: 768px) { 
+        .quick-nav-btn {
+            width: 45px;
+            height: 45px;
+            font-size: 18px;
+        }
+        
+        .quick-nav-panel { 
+            right: 0; 
+            left: auto; 
+            min-width: 200px;
+            padding: 15px;
+        } 
+    }
+    
+    @media (max-width: 480px) {
+        .quick-nav-btn {
+            width: 40px;
+            height: 40px;
+            font-size: 16px;
+        }
+        
+        .quick-nav-panel {
+            right: 0;
+            left: auto;
+            min-width: 180px;
+            padding: 12px;
+        }
+    }
+    
+    .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        position: relative;
+    }
+    </style>
+</head>
+<body>
+   
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <i class="fas fa-leaf"></i>
+                    <span>Info Nutri</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link">Início</a></li>
+                    <li><a href="#sobre" class="nav-link">Sobre</a></li>
+                    <li><a href="#nutrientes" class="nav-link">Nutrientes</a></li>
+                    <li><a href="#alimentos" class="nav-link">Alimentos</a></li>
+                    <li><a href="#dicas" class="nav-link">Dicas</a></li>
+                    <li><a href="receitas.html" class="nav-link">Receitas</a></li>
+                    <li><a href="quiz-saude.html" class="nav-link">Quiz de Saúde</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="quick-nav-btn" id="quickNavBtn" aria-label="Navegação rápida">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="quick-nav-panel" id="quickNavPanel" aria-hidden="true">
+                        <span class="quick-nav-close" id="quickNavClose" title="Fechar">&times;</span>
+                        <a href="#home" class="quick-nav-link">
+                            <i class="fas fa-home"></i>
+                            Início
+                        </a>
+                        <a href="#sobre" class="quick-nav-link">
+                            <i class="fas fa-info-circle"></i>
+                            Sobre
+                        </a>
+                        <a href="#nutrientes" class="quick-nav-link">
+                            <i class="fas fa-apple-alt"></i>
+                            Nutrientes
+                        </a>
+                        <a href="#alimentos" class="quick-nav-link">
+                            <i class="fas fa-utensils"></i>
+                            Alimentos
+                        </a>
+                        <a href="#dicas" class="quick-nav-link">
+                            <i class="fas fa-lightbulb"></i>
+                            Dicas
+                        </a>
+                        <a href="receitas.html" class="quick-nav-link">
+                            <i class="fas fa-book-open"></i>
+                            Receitas
+                        </a>
+                        <a href="quiz-saude.html" class="quick-nav-link">
+                            <i class="fas fa-clipboard-check"></i>
+                            Quiz de Saúde
+                        </a>
+                    </div>
+                    <div class="hamburger">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+   
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Transforme sua vida através da <span class="highlight">nutrição</span></h1>
+                <p class="hero-description">
+                    Descubra os segredos de uma alimentação equilibrada e saudável. 
+                    Aprenda sobre nutrientes essenciais, receitas nutritivas e dicas práticas 
+                    para melhorar sua qualidade de vida.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#nutrientes" class="btn btn-primary">Começar Agora</a>
+                    <a href="quiz-saude.html" class="btn btn-secondary">Fazer Quiz de Saúde</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="food-icons">
+                    <i class="fas fa-apple-alt"></i>
+                    <i class="fas fa-carrot"></i>
+                    <i class="fas fa-fish"></i>
+                    <i class="fas fa-seedling"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="sobre" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>Por que a nutrição é importante?</h2>
+                <p>Uma alimentação equilibrada é fundamental para manter a saúde e prevenir doenças</p>
+            </div>
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="card-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Saúde Cardiovascular</h3>
+                    <p>Alimentos ricos em ômega-3, fibras e antioxidantes ajudam a manter o coração saudável e reduzir o risco de doenças cardiovasculares.</p>
+                </div>
+                <div class="about-card">
+                    <div class="card-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Função Cerebral</h3>
+                    <p>Nutrientes como ômega-3, vitaminas do complexo B e antioxidantes são essenciais para o bom funcionamento do cérebro e memória.</p>
+                </div>
+                <div class="about-card">
+                    <div class="card-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Sistema Imunológico</h3>
+                    <p>Vitaminas C, D, zinco e outros micronutrientes fortalecem o sistema imunológico e ajudam a prevenir infecções.</p>
+                </div>
+                <div class="about-card">
+                    <div class="card-icon">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <h3>Energia e Performance</h3>
+                    <p>Carboidratos complexos, proteínas e gorduras saudáveis fornecem energia sustentada para atividades físicas e mentais.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="nutrientes" class="nutrients">
+        <div class="container">
+            <div class="section-header">
+                <h2>Nutrientes Essenciais</h2>
+                <p>Conheça os principais nutrientes que seu corpo precisa</p>
+            </div>
+            <div class="nutrients-grid">
+                <div class="nutrient-card">
+                    <div class="nutrient-header">
+                        <i class="fas fa-drumstick-bite"></i>
+                        <h3>Proteínas</h3>
+                    </div>
+                    <div class="nutrient-content">
+                        <p><strong>Função:</strong> Construção e reparo de tecidos, produção de enzimas e hormônios</p>
+                        <p><strong>Fontes:</strong> Carnes, peixes, ovos, leguminosas, quinoa</p>
+                        <div class="nutrient-bar">
+                            <div class="bar-fill" style="width: 90%"></div>
+                        </div>
+                        <span class="nutrient-amount">Recomendação: 0.8g/kg de peso</span>
+                    </div>
+                </div>
+
+                <div class="nutrient-card">
+                    <div class="nutrient-header">
+                        <i class="fas fa-bread-slice"></i>
+                        <h3>Carboidratos</h3>
+                    </div>
+                    <div class="nutrient-content">
+                        <p><strong>Função:</strong> Principal fonte de energia para o corpo e cérebro</p>
+                        <p><strong>Fontes:</strong> Grãos integrais, frutas, vegetais, batata doce</p>
+                        <div class="nutrient-bar">
+                            <div class="bar-fill" style="width: 70%"></div>
+                        </div>
+                        <span class="nutrient-amount">Recomendação: 45-65% das calorias</span>
+                    </div>
+                </div>
+
+                <div class="nutrient-card">
+                    <div class="nutrient-header">
+                        <i class="fas fa-oil-can"></i>
+                        <h3>Gorduras Saudáveis</h3>
+                    </div>
+                    <div class="nutrient-content">
+                        <p><strong>Função:</strong> Absorção de vitaminas, produção hormonal, proteção celular</p>
+                        <p><strong>Fontes:</strong> Azeite, abacate, nozes, peixes gordurosos</p>
+                        <div class="nutrient-bar">
+                            <div class="bar-fill" style="width: 60%"></div>
+                        </div>
+                        <span class="nutrient-amount">Recomendação: 20-35% das calorias</span>
+                    </div>
+                </div>
+
+                <div class="nutrient-card">
+                    <div class="nutrient-header">
+                        <i class="fas fa-apple-alt"></i>
+                        <h3>Vitaminas</h3>
+                    </div>
+                    <div class="nutrient-content">
+                        <p><strong>Função:</strong> Regulação de processos metabólicos e proteção celular</p>
+                        <p><strong>Fontes:</strong> Frutas, vegetais, grãos integrais, carnes</p>
+                        <div class="nutrient-bar">
+                            <div class="bar-fill" style="width: 85%"></div>
+                        </div>
+                        <span class="nutrient-amount">13 vitaminas essenciais</span>
+                    </div>
+                </div>
+
+                <div class="nutrient-card">
+                    <div class="nutrient-header">
+                        <i class="fas fa-mountain"></i>
+                        <h3>Minerais</h3>
+                    </div>
+                    <div class="nutrient-content">
+                        <p><strong>Função:</strong> Estrutura óssea, contração muscular, transporte de oxigênio</p>
+                        <p><strong>Fontes:</strong> Vegetais verdes, laticínios, carnes, nozes</p>
+                        <div class="nutrient-bar">
+                            <div class="bar-fill" style="width: 75%"></div>
+                        </div>
+                        <span class="nutrient-amount">16 minerais essenciais</span>
+                    </div>
+                </div>
+
+                <div class="nutrient-card">
+                    <div class="nutrient-header">
+                        <i class="fas fa-tint"></i>
+                        <h3>Água</h3>
+                    </div>
+                    <div class="nutrient-content">
+                        <p><strong>Função:</strong> Transporte de nutrientes, regulação térmica, eliminação de toxinas</p>
+                        <p><strong>Fontes:</strong> Água pura, frutas, vegetais, chás</p>
+                        <div class="nutrient-bar">
+                            <div class="bar-fill" style="width: 95%"></div>
+                        </div>
+                        <span class="nutrient-amount">2-3 litros por dia</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="alimentos" class="foods">
+        <div class="container">
+            <div class="section-header">
+                <h2>Guia de Alimentos</h2>
+                <p>Conheça os valores nutricionais dos principais grupos alimentares</p>
+            </div>
+            
+            
+            <div class="food-category">
+                <div class="category-header">
+                    <div class="category-image">
+                        <img src="https://static.vecteezy.com/ti/fotos-gratis/t2/24174781-suculento-frutas-topo-visao-fundo-ai-generativo-foto.jpg?w=100&h=100&fit=crop&crop=center" alt="Frutas" loading="lazy">
+                    </div>
+                    <h3>Frutas</h3>
+                </div>
+                <div class="foods-grid">
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=200&h=200&fit=crop&crop=center" alt="Maçã" loading="lazy">
+                        </div>
+                        <div class="food-name">Maçã</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Proteínas:</span> 0.3g</div>
+                            <div class="nutrient"><span class="label">Carboidratos:</span> 14g</div>
+                            <div class="nutrient"><span class="label">Fibras:</span> 2.4g</div>
+                            <div class="nutrient"><span class="label">Vitamina C:</span> 4.6mg</div>
+                            <div class="nutrient"><span class="label">Potássio:</span> 107mg</div>
+                        </div>
+                    </div>
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=200&h=200&fit=crop&crop=center" alt="Banana" loading="lazy">
+                        </div>
+                        <div class="food-name">Banana</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Proteínas:</span> 1.1g</div>
+                            <div class="nutrient"><span class="label">Carboidratos:</span> 23g</div>
+                            <div class="nutrient"><span class="label">Fibras:</span> 2.6g</div>
+                            <div class="nutrient"><span class="label">Vitamina B6:</span> 0.4mg</div>
+                            <div class="nutrient"><span class="label">Potássio:</span> 358mg</div>
+                        </div>
+                    </div>
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://minhasaude.proteste.org.br/wp-content/uploads/2022/10/muitas-laranjas.png?w=200&h=200&fit=crop&crop=center" alt="Laranja" loading="lazy">
+                        </div>
+                        <div class="food-name">Laranja</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Proteínas:</span> 0.9g</div>
+                            <div class="nutrient"><span class="label">Carboidratos:</span> 12g</div>
+                            <div class="nutrient"><span class="label">Fibras:</span> 2.4g</div>
+                            <div class="nutrient"><span class="label">Vitamina C:</span> 53.2mg</div>
+                            <div class="nutrient"><span class="label">Folato:</span> 40μg</div>
+                        </div>
+                    </div>
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEhfcQzTAO2kRnv9ZB9zAoSgrtsMdXba8qPg&s?w=200&h=200&fit=crop&crop=center" alt="Morango" loading="lazy">
+                        </div>
+                        <div class="food-name">Morango</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Proteínas:</span> 0.7g</div>
+                            <div class="nutrient"><span class="label">Carboidratos:</span> 8g</div>
+                            <div class="nutrient"><span class="label">Fibras:</span> 2g</div>
+                            <div class="nutrient"><span class="label">Vitamina C:</span> 58.8mg</div>
+                            <div class="nutrient"><span class="label">Manganês:</span> 0.4mg</div>
+                        </div>
+                    </div>
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://www.correiobraziliense.com.br/cbradar/wp-content/uploads/2025/07/abacate_1753364436199.jpg?w=200&h=200&fit=crop&crop=center" alt="Abacate" loading="lazy">
+                        </div>
+                        <div class="food-name">Abacate</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Proteínas:</span> 2g</div>
+                            <div class="nutrient"><span class="label">Carboidratos:</span> 9g</div>
+                            <div class="nutrient"><span class="label">Fibras:</span> 7g</div>
+                            <div class="nutrient"><span class="label">Gorduras Saudáveis:</span> 15g</div>
+                            <div class="nutrient"><span class="label">Potássio:</span> 485mg</div>
+                        </div>
+                    </div>
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://extrafruti.com.br/wp-content/uploads/2023/08/capa_.png?w=200&h=200&fit=crop&crop=center" alt="Uva" loading="lazy">
+                        </div>
+                        <div class="food-name">Uva</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Proteínas:</span> 0.6g</div>
+                            <div class="nutrient"><span class="label">Carboidratos:</span> 16g</div>
+                            <div class="nutrient"><span class="label">Fibras:</span> 0.9g</div>
+                            <div class="nutrient"><span class="label">Vitamina K:</span> 14.6μg</div>
+                            <div class="nutrient"><span class="label">Resveratrol:</span> 0.2mg</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="food-category">
+                <div class="category-header">
+                    <div class="category-image">
+                        <img src="https://static.significados.com.br/foto/vegetais-fb.jpg?class=ogImageWide?w=100&h=100&fit=crop&crop=center" alt="Vegetais" loading="lazy">
+                    </div>
+                    <h3>Vegetais</h3>
+                </div>
+                <div class="foods-grid">
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?w=200&h=200&fit=crop&crop=center" alt="Brócolis" loading="lazy">
+                        </div>
+                        <div class="food-name">Brócolis</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Proteínas:</span> 2.8g</div>
+                            <div class="nutrient"><span class="label">Carboidratos:</span> 7g</div>
+                            <div class="nutrient"><span class="label">Fibras:</span> 2.6g</div>
+                            <div class="nutrient"><span class="label">Vitamina C:</span> 89.2mg</div>
+                            <div class="nutrient"><span class="label">Cálcio:</span> 47mg</div>
+                        </div>
+                    </div>
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=200&h=200&fit=crop&crop=center" alt="Espinafre" loading="lazy">
+                        </div>
+                        <div class="food-name">Espinafre</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Proteínas:</span> 2.9g</div>
+                            <div class="nutrient"><span class="label">Carboidratos:</span> 3.6g</div>
+                            <div class="nutrient"><span class="label">Fibras:</span> 2.2g</div>
+                            <div class="nutrient"><span class="label">Ferro:</span> 2.7mg</div>
+                            <div class="nutrient"><span class="label">Folato:</span> 194μg</div>
+                        </div>
+                    </div>
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=200&h=200&fit=crop&crop=center" alt="Cenoura" loading="lazy">
+                        </div>
+                        <div class="food-name">Cenoura</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Proteínas:</span> 0.9g</div>
+                            <div class="nutrient"><span class="label">Carboidratos:</span> 10g</div>
+                            <div class="nutrient"><span class="label">Fibras:</span> 2.8g</div>
+                            <div class="nutrient"><span class="label">Vitamina A:</span> 16706 IU</div>
+                            <div class="nutrient"><span class="label">Potássio:</span> 320mg</div>
+                        </div>
+                    </div>
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJMGwVDPdb86RyftWYWqZtJV5Wne26vD3YgA&s?w=200&h=200&fit=crop&crop=center" alt="Tomate" loading="lazy">
+                        </div>
+                        <div class="food-name">Tomate</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Proteínas:</span> 0.9g</div>
+                            <div class="nutrient"><span class="label">Carboidratos:</span> 3.9g</div>
+                            <div class="nutrient"><span class="label">Fibras:</span> 1.2g</div>
+                            <div class="nutrient"><span class="label">Licopeno:</span> 2.5mg</div>
+                            <div class="nutrient"><span class="label">Vitamina C:</span> 13.7mg</div>
+                        </div>
+                    </div>
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvaonMNRmSWsbA8bWhcgmfGNLO9spRYNNn8g&s?w=200&h=200&fit=crop&crop=center" alt="Pimentão" loading="lazy">
+                        </div>
+                        <div class="food-name">Pimentão</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Proteínas:</span> 0.9g</div>
+                            <div class="nutrient"><span class="label">Carboidratos:</span> 4.6g</div>
+                            <div class="nutrient"><span class="label">Fibras:</span> 1.5g</div>
+                            <div class="nutrient"><span class="label">Vitamina C:</span> 127.7mg</div>
+                            <div class="nutrient"><span class="label">Vitamina A:</span> 3131 IU</div>
+                        </div>
+                    </div>
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNJ7dE08OLNjJTOGNHNgVvD0LYufl3ilb_gQ&s?w=200&h=200&fit=crop&crop=center" alt="Batata Doce" loading="lazy">
+                        </div>
+                        <div class="food-name">Batata Doce</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Proteínas:</span> 1.6g</div>
+                            <div class="nutrient"><span class="label">Carboidratos:</span> 20g</div>
+                            <div class="nutrient"><span class="label">Fibras:</span> 3g</div>
+                            <div class="nutrient"><span class="label">Vitamina A:</span> 14187 IU</div>
+                            <div class="nutrient"><span class="label">Potássio:</span> 337mg</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="food-category">
+                <div class="category-header">
+                    <div class="category-image">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKP3D79i_uq-pmyBeDgKiym5nUcJToyq1MNA&s?w=100&h=100&fit=crop&crop=center" alt="Carnes" loading="lazy">
+                    </div>
+                    <h3>Carnes</h3>
+                </div>
+                <div class="foods-grid">
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXtw49AIunbL8by87YquGcN3NsraBpPEPdgw&s?w=200&h=200&fit=crop&crop=center" alt="Peito de Frango" loading="lazy">
+                        </div>
+                        <div class="food-name">Peito de Frango</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Proteínas:</span> 31g</div>
+                            <div class="nutrient"><span class="label">Carboidratos:</span> 0g</div>
+                            <div class="nutrient"><span class="label">Gorduras:</span> 3.6g</div>
+                            <div class="nutrient"><span class="label">Ferro:</span> 1mg</div>
+                            <div class="nutrient"><span class="label">Zinco:</span> 1mg</div>
+                        </div>
+                    </div>
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=200&h=200&fit=crop&crop=center" alt="Salmão" loading="lazy">
+                        </div>
+                        <div class="food-name">Salmão</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Proteínas:</span> 25g</div>
+                            <div class="nutrient"><span class="label">Carboidratos:</span> 0g</div>
+                            <div class="nutrient"><span class="label">Ômega-3:</span> 1.8g</div>
+                            <div class="nutrient"><span class="label">Vitamina D:</span> 11μg</div>
+                            <div class="nutrient"><span class="label">Selênio:</span> 36.5μg</div>
+                        </div>
+                    </div>
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=200&h=200&fit=crop&crop=center" alt="Carne Bovina" loading="lazy">
+                        </div>
+                        <div class="food-name">Carne Bovina</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Proteínas:</span> 26g</div>
+                            <div class="nutrient"><span class="label">Carboidratos:</span> 0g</div>
+                            <div class="nutrient"><span class="label">Ferro:</span> 2.6mg</div>
+                            <div class="nutrient"><span class="label">Zinco:</span> 4.8mg</div>
+                            <div class="nutrient"><span class="label">Vitamina B12:</span> 2.4μg</div>
+                        </div>
+                    </div>
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOwYWs9KuVQPgioTyW17XiE4nLFx5LP6RHVA&s?w=200&h=200&fit=crop&crop=center" alt="Peixe Tilápia" loading="lazy">
+                        </div>
+                        <div class="food-name">Tilápia</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Proteínas:</span> 26g</div>
+                            <div class="nutrient"><span class="label">Carboidratos:</span> 0g</div>
+                            <div class="nutrient"><span class="label">Gorduras:</span> 1.7g</div>
+                            <div class="nutrient"><span class="label">Fósforo:</span> 204mg</div>
+                            <div class="nutrient"><span class="label">Selênio:</span> 41.8μg</div>
+                        </div>
+                    </div>
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://media-cdn.tripadvisor.com/media/photo-s/12/c9/3d/aa/bife-de-atum-grelhado.jpg?w=200&h=200&fit=crop&crop=center" alt="Atum" loading="lazy">
+                        </div>
+                        <div class="food-name">Atum</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Proteínas:</span> 30g</div>
+                            <div class="nutrient"><span class="label">Carboidratos:</span> 0g</div>
+                            <div class="nutrient"><span class="label">Ômega-3:</span> 1.3g</div>
+                            <div class="nutrient"><span class="label">Vitamina B12:</span> 2.5μg</div>
+                            <div class="nutrient"><span class="label">Selênio:</span> 108μg</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="food-category">
+                <div class="category-header">
+                    <div class="category-image">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyTYxgxtu5UN6mlkcRWgfAfAAyfy0yjo2LCw&s?w=100&h=100&fit=crop&crop=center" alt="Sucos Naturais" loading="lazy">
+                    </div>
+                    <h3>Sucos Naturais</h3>
+                </div>
+                <div class="foods-grid">
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcK9vXkxY2etNif44CKkuZROeGeVyDC93DEw&s?w=200&h=200&fit=crop&crop=center" alt="Suco de Laranja" loading="lazy">
+                        </div>
+                        <div class="food-name">Suco de Laranja</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Proteínas:</span> 1.7g</div>
+                            <div class="nutrient"><span class="label">Carboidratos:</span> 20g</div>
+                            <div class="nutrient"><span class="label">Fibras:</span> 0.5g</div>
+                            <div class="nutrient"><span class="label">Vitamina C:</span> 70mg</div>
+                            <div class="nutrient"><span class="label">Folato:</span> 74μg</div>
+                        </div>
+                    </div>
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJQBxJ-Oa5BnvsUzVJxzqZjo5vjUv9-_4NiQ&s?w=200&h=200&fit=crop&crop=center" alt="Suco de Uva" loading="lazy">
+                        </div>
+                        <div class="food-name">Suco de Uva</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Proteínas:</span> 0.4g</div>
+                            <div class="nutrient"><span class="label">Carboidratos:</span> 16g</div>
+                            <div class="nutrient"><span class="label">Antocianinas:</span> 24mg</div>
+                            <div class="nutrient"><span class="label">Resveratrol:</span> 0.3mg</div>
+                            <div class="nutrient"><span class="label">Potássio:</span> 190mg</div>
+                        </div>
+                    </div>
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhyT4vVYKCbjEZioz8Ve2-RWXeQTInvubgDA&s?w=200&h=200&fit=crop&crop=center" alt="Suco de Açaí" loading="lazy">
+                        </div>
+                        <div class="food-name">Suco de Açaí</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Proteínas:</span> 1.2g</div>
+                            <div class="nutrient"><span class="label">Carboidratos:</span> 4g</div>
+                            <div class="nutrient"><span class="label">Fibras:</span> 2.6g</div>
+                            <div class="nutrient"><span class="label">Antocianinas:</span> 319mg</div>
+                            <div class="nutrient"><span class="label">Cálcio:</span> 118mg</div>
+                        </div>
+                    </div>
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://image.tuasaude.com/media/article/ua/hv/suco-de-limao-desintoxicante_30808.jpg?width=686&height=487?w=200&h=200&fit=crop&crop=center" alt="Suco de Limão" loading="lazy">
+                        </div>
+                        <div class="food-name">Suco de Limão</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Proteínas:</span> 0.4g</div>
+                            <div class="nutrient"><span class="label">Carboidratos:</span> 6g</div>
+                            <div class="nutrient"><span class="label">Fibras:</span> 0.1g</div>
+                            <div class="nutrient"><span class="label">Vitamina C:</span> 38.7mg</div>
+                            <div class="nutrient"><span class="label">Ácido Cítrico:</span> 1.4g</div>
+                        </div>
+                    </div>
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaU18j3e2cxfRWjc0wcL-OatV-d6mkQ3P-ag&s?w=200&h=200&fit=crop&crop=center" alt="Suco de Maçã" loading="lazy">
+                        </div>
+                        <div class="food-name">Suco de Maçã</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Proteínas:</span> 0.2g</div>
+                            <div class="nutrient"><span class="label">Carboidratos:</span> 12g</div>
+                            <div class="nutrient"><span class="label">Fibras:</span> 0.2g</div>
+                            <div class="nutrient"><span class="label">Vitamina C:</span> 2.2mg</div>
+                            <div class="nutrient"><span class="label">Potássio:</span> 101mg</div>
+                        </div>
+                    </div>
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://static.vecteezy.com/ti/fotos-gratis/t2/47082156-fresco-saboroso-morango-suco-dentro-uma-vidro-em-uma-de-madeira-mesa-ao-lado-morango-foto.jpg?w=200&h=200&fit=crop&crop=center" alt="Suco de Morango" loading="lazy">
+                        </div>
+                        <div class="food-name">Suco de Morango</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Proteínas:</span> 0.7g</div>
+                            <div class="nutrient"><span class="label">Carboidratos:</span> 7g</div>
+                            <div class="nutrient"><span class="label">Fibras:</span> 0.3g</div>
+                            <div class="nutrient"><span class="label">Vitamina C:</span> 58.8mg</div>
+                            <div class="nutrient"><span class="label">Antocianinas:</span> 25mg</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="food-category">
+                <div class="category-header">
+                    <div class="category-image">
+                        <img src="https://agropos.com.br/wp-content/uploads/2022/10/Imagem-2023-12-20T115320.707.png?w=100&h=100&fit=crop&crop=center" alt="Grãos e Cereais" loading="lazy">
+                    </div>
+                    <h3>Grãos e Cereais</h3>
+                </div>
+                <div class="foods-grid">
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCt64RLMouEg-93oD0ES35aahltThEEuLhKQ&s?w=200&h=200&fit=crop&crop=center" alt="Quinoa" loading="lazy">
+                        </div>
+                        <div class="food-name">Quinoa</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Proteínas:</span> 4.4g</div>
+                            <div class="nutrient"><span class="label">Carboidratos:</span> 22g</div>
+                            <div class="nutrient"><span class="label">Fibras:</span> 2.8g</div>
+                            <div class="nutrient"><span class="label">Ferro:</span> 1.5mg</div>
+                            <div class="nutrient"><span class="label">Magnésio:</span> 64mg</div>
+                        </div>
+                    </div>
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQsUubyTfO_6nV1mYFDQapzg540Kp2RXn2LQ&s?w=200&h=200&fit=crop&crop=center" alt="Aveia" loading="lazy">
+                        </div>
+                        <div class="food-name">Aveia</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Proteínas:</span> 2.4g</div>
+                            <div class="nutrient"><span class="label">Carboidratos:</span> 12g</div>
+                            <div class="nutrient"><span class="label">Fibras:</span> 1.7g</div>
+                            <div class="nutrient"><span class="label">Betaglucana:</span> 0.8g</div>
+                            <div class="nutrient"><span class="label">Manganês:</span> 0.9mg</div>
+                        </div>
+                    </div>
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://applicativa-marketplace-prod.s3.amazonaws.com/como-fazer-arroz-integral-capa.jpg?w=200&h=200&fit=crop&crop=center" alt="Arroz Integral" loading="lazy">
+                        </div>
+                        <div class="food-name">Arroz Integral</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Proteínas:</span> 2.6g</div>
+                            <div class="nutrient"><span class="label">Carboidratos:</span> 23g</div>
+                            <div class="nutrient"><span class="label">Fibras:</span> 1.8g</div>
+                            <div class="nutrient"><span class="label">Tiamina:</span> 0.1mg</div>
+                            <div class="nutrient"><span class="label">Magnésio:</span> 43mg</div>
+                        </div>
+                    </div>
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://fundacaocargill.org.br/wp-content/uploads/2023/09/fundacao-cargill-lentilha-conheca-beneficios.jpg?w=200&h=200&fit=crop&crop=center" alt="Lentilha" loading="lazy">
+                        </div>
+                        <div class="food-name">Lentilha</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Proteínas:</span> 9g</div>
+                            <div class="nutrient"><span class="label">Carboidratos:</span> 20g</div>
+                            <div class="nutrient"><span class="label">Fibras:</span> 8g</div>
+                            <div class="nutrient"><span class="label">Ferro:</span> 3.3mg</div>
+                            <div class="nutrient"><span class="label">Folato:</span> 181μg</div>
+                        </div>
+                    </div>
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZnCGxuhfw4FB-uB8qCZwjSmcrTWdoqbJOag&s?w=200&h=200&fit=crop&crop=center" alt="Chia" loading="lazy">
+                        </div>
+                        <div class="food-name">Chia</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Proteínas:</span> 4.7g</div>
+                            <div class="nutrient"><span class="label">Carboidratos:</span> 1g</div>
+                            <div class="nutrient"><span class="label">Fibras:</span> 5.5g</div>
+                            <div class="nutrient"><span class="label">Ômega-3:</span> 2.5g</div>
+                            <div class="nutrient"><span class="label">Cálcio:</span> 77mg</div>
+                        </div>
+                    </div>
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnDQP3zYzDv7_cgnMR1FI_racrtdKFdfh0eA&s?w=200&h=200&fit=crop&crop=center" alt="Amaranto" loading="lazy">
+                        </div>
+                        <div class="food-name">Amaranto</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Proteínas:</span> 3.8g</div>
+                            <div class="nutrient"><span class="label">Carboidratos:</span> 19g</div>
+                            <div class="nutrient"><span class="label">Fibras:</span> 2.1g</div>
+                            <div class="nutrient"><span class="label">Ferro:</span> 2.1mg</div>
+                            <div class="nutrient"><span class="label">Magnésio:</span> 65mg</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="food-category">
+                <div class="category-header">
+                    <div class="category-image">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqelxInpEzvpyAhXiQXsbiJRKMtA3DyHk_5A&s?w=100&h=100&fit=crop&crop=center" alt="Temperos Saudáveis" loading="lazy">
+                    </div>
+                    <h3>Temperos Saudáveis</h3>
+                </div>
+                <div class="foods-grid">
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://joov.com.br/images/alho-saiba-quais-sao-os-seu-beneficios-para-a-sua-saude-image.jpg?w=200&h=200&fit=crop&crop=center" alt="Alho" loading="lazy">
+                        </div>
+                        <div class="food-name">Alho</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Benefício:</span> Imunidade</div>
+                            <div class="nutrient"><span class="label">Propriedade:</span> Antibacteriano</div>
+                            <div class="nutrient"><span class="label">Uso:</span> Refogados, temperos</div>
+                            <div class="nutrient"><span class="label">Vitamina:</span> C, B6</div>
+                            <div class="nutrient"><span class="label">Allicina:</span> Ativo principal</div>
+                        </div>
+                    </div>
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXsJccjL2tTAEoCAgB2KbE2O2VVLPUY_doeg&s?w=200&h=200&fit=crop&crop=center" alt="Cebola" loading="lazy">
+                        </div>
+                        <div class="food-name">Cebola</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Benefício:</span> Anti-inflamatório</div>
+                            <div class="nutrient"><span class="label">Propriedade:</span> Antioxidante</div>
+                            <div class="nutrient"><span class="label">Uso:</span> Base para refogados</div>
+                            <div class="nutrient"><span class="label">Vitamina:</span> C, B6, Folato</div>
+                            <div class="nutrient"><span class="label">Quercetina:</span> Flavonoide</div>
+                        </div>
+                    </div>
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfGA9W8FO2-zKTUa_wAf-H9uIJpFcmdSUbEg&s?w=200&h=200&fit=crop&crop=center" alt="Gengibre" loading="lazy">
+                        </div>
+                        <div class="food-name">Gengibre</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Benefício:</span> Digestão</div>
+                            <div class="nutrient"><span class="label">Propriedade:</span> Anti-náusea</div>
+                            <div class="nutrient"><span class="label">Uso:</span> Chás, marinadas</div>
+                            <div class="nutrient"><span class="label">Gingerol:</span> Composto ativo</div>
+                            <div class="nutrient"><span class="label">Vitamina:</span> C, Magnésio</div>
+                        </div>
+                    </div>
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR98NVg1tMictX3m3Fof3rDzan49WMu9hVK1g&s?w=200&h=200&fit=crop&crop=center" alt="Açafrão" loading="lazy">
+                        </div>
+                        <div class="food-name">Açafrão</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Benefício:</span> Anti-inflamatório</div>
+                            <div class="nutrient"><span class="label">Propriedade:</span> Antioxidante forte</div>
+                            <div class="nutrient"><span class="label">Uso:</span> Arroz, carnes</div>
+                            <div class="nutrient"><span class="label">Curcumina:</span> Princípio ativo</div>
+                            <div class="nutrient"><span class="label">Ação:</span> Neuroproteção</div>
+                        </div>
+                    </div>
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://www.herbazest.com/imgs/e/4/8/71152/oregano.jpg?w=200&h=200&fit=crop&crop=center" alt="Orégano" loading="lazy">
+                        </div>
+                        <div class="food-name">Orégano</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Benefício:</span> Digestão</div>
+                            <div class="nutrient"><span class="label">Propriedade:</span> Antimicrobiano</div>
+                            <div class="nutrient"><span class="label">Uso:</span> Massas, pizzas</div>
+                            <div class="nutrient"><span class="label">Vitamina:</span> K, Cálcio</div>
+                            <div class="nutrient"><span class="label">Carvacrol:</span> Antioxidante</div>
+                        </div>
+                    </div>
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAtpZAMDlhAM93viBufUSR1RgcL8v-Vy0l9A&s?w=200&h=200&fit=crop&crop=center" alt="Manjericão" loading="lazy">
+                        </div>
+                        <div class="food-name">Manjericão</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Benefício:</span> Relaxante</div>
+                            <div class="nutrient"><span class="label">Propriedade:</span> Anti-stress</div>
+                            <div class="nutrient"><span class="label">Uso:</span> Pesto, saladas</div>
+                            <div class="nutrient"><span class="label">Vitamina:</span> K, Vitamina A</div>
+                            <div class="nutrient"><span class="label">Eugenol:</span> Ativo medicinal</div>
+                        </div>
+                    </div>
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://ciclovivo.com.br/wp-content/uploads/2020/08/herbs-5117039_1280-1024x682.jpg?w=200&h=200&fit=crop&crop=center" alt="Alecrim" loading="lazy">
+                        </div>
+                        <div class="food-name">Alecrim</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Benefício:</span> Memória</div>
+                            <div class="nutrient"><span class="label">Propriedade:</span> Melhora cognição</div>
+                            <div class="nutrient"><span class="label">Uso:</span> Carnes, batatas</div>
+                            <div class="nutrient"><span class="label">Vitamina:</span> A, Cálcio</div>
+                            <div class="nutrient"><span class="label">Ácido carnósico:</span> Neuroproteção</div>
+                        </div>
+                    </div>
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://diariodonordeste.verdesmares.com.br/image/contentid/policy:1.3375083:1685457645/shutterstock_493241509.jpg?f=16x9&h=574&w=1020&$p$f$h$w=1ec62d7?w=200&h=200&fit=crop&crop=center" alt="Tomilho" loading="lazy">
+                        </div>
+                        <div class="food-name">Tomilho</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Benefício:</span> Respiração</div>
+                            <div class="nutrient"><span class="label">Propriedade:</span> Antisséptico</div>
+                            <div class="nutrient"><span class="label">Uso:</span> Sopas, ensopados</div>
+                            <div class="nutrient"><span class="label">Vitamina:</span> C, Ferro</div>
+                            <div class="nutrient"><span class="label">Timol:</span> Óleo essencial</div>
+                        </div>
+                    </div>
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://www.maisquitanda.com.br/image/cache/3-temperos/salsa-800x800.jpg?w=200&h=200&fit=crop&crop=center" alt="Salsa" loading="lazy">
+                        </div>
+                        <div class="food-name">Salsa</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Benefício:</span> Diurético</div>
+                            <div class="nutrient"><span class="label">Propriedade:</span> Detoxificante</div>
+                            <div class="nutrient"><span class="label">Uso:</span> Guarnição, molhos</div>
+                            <div class="nutrient"><span class="label">Vitamina:</span> K, Vitamina C</div>
+                            <div class="nutrient"><span class="label">Ferro:</span> Abundante</div>
+                        </div>
+                    </div>
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="https://www.procorpoestetica.com.br/site/wp-content/uploads/2017/02/5-beneficios-do-coentro-para-a-saude-e-para-a-pele.jpg?w=200&h=200&fit=crop&crop=center" alt="Coentro" loading="lazy">
+                        </div>
+                        <div class="food-name">Coentro</div>
+                        <div class="nutrition-info">
+                            <div class="nutrient"><span class="label">Benefício:</span> Digestão</div>
+                            <div class="nutrient"><span class="label">Propriedade:</span> Carminativo</div>
+                            <div class="nutrient"><span class="label">Uso:</span> Marinadas, curry</div>
+                            <div class="nutrient"><span class="label">Vitamina:</span> K, Vitamina C</div>
+                            <div class="nutrient"><span class="label">Detox:</span> Metais pesados</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="dicas" class="tips">
+        <div class="container">
+            <div class="section-header">
+                <h2>Dicas Práticas de Nutrição</h2>
+                <p>Mudanças simples que fazem grande diferença na sua saúde</p>
+            </div>
+            <div class="tips-container">
+                <div class="tip-item">
+                    <div class="tip-number">01</div>
+                    <div class="tip-content">
+                        <h3>Planeje suas refeições</h3>
+                        <p>Dedique um tempo no fim de semana para planejar e preparar suas refeições da semana. Isso evita escolhas impulsivas e garante uma alimentação mais equilibrada.</p>
+                    </div>
+                </div>
+
+                <div class="tip-item">
+                    <div class="tip-number">02</div>
+                    <div class="tip-content">
+                        <h3>Inclua mais vegetais</h3>
+                        <p>Metade do seu prato deve ser composto por vegetais coloridos. Quanto mais cores, mais nutrientes diferentes você estará consumindo.</p>
+                    </div>
+                </div>
+
+                <div class="tip-item">
+                    <div class="tip-number">03</div>
+                    <div class="tip-content">
+                        <h3>Hidrate-se adequadamente</h3>
+                        <p>Beba água regularmente ao longo do dia. A sede já é um sinal de desidratação. Mantenha uma garrafa de água sempre por perto.</p>
+                    </div>
+                </div>
+
+                <div class="tip-item">
+                    <div class="tip-number">04</div>
+                    <div class="tip-content">
+                        <h3>Prefira alimentos integrais</h3>
+                        <p>Escolha arroz integral, pão integral, massas integrais. Eles fornecem mais fibras, vitaminas e minerais que os refinados.</p>
+                    </div>
+                </div>
+
+                <div class="tip-item">
+                    <div class="tip-number">05</div>
+                    <div class="tip-content">
+                        <h3>Controle o tamanho das porções</h3>
+                        <p>Use pratos menores e preste atenção aos sinais de saciedade. Coma devagar e mastigue bem os alimentos.</p>
+                    </div>
+                </div>
+
+                <div class="tip-item">
+                    <div class="tip-number">06</div>
+                    <div class="tip-content">
+                        <h3>Reduza o açúcar refinado</h3>
+                        <p>Substitua doces por frutas frescas, use mel ou açúcar mascavo com moderação. Evite bebidas açucaradas e sucos industrializados.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section id="quiz" class="quiz-highlight">
+        <div class="container">
+            <div class="quiz-highlight-content">
+                <div class="quiz-highlight-text">
+                    <h2>Descubra o quão saudável você é!</h2>
+                    <p>Faça nosso quiz personalizado e receba recomendações específicas para melhorar sua saúde e bem-estar.</p>
+                    <ul class="quiz-features">
+                        <li><i class="fas fa-check"></i> 25 perguntas personalizadas</li>
+                        <li><i class="fas fa-check"></i> Análise detalhada por categoria</li>
+                        <li><i class="fas fa-check"></i> Recomendações personalizadas</li>
+                        <li><i class="fas fa-check"></i> Resultado em 5 minutos</li>
+                    </ul>
+                    <a href="quiz-saude.html" class="btn btn-primary">Fazer Quiz Agora</a>
+                </div>
+                <div class="quiz-highlight-image">
+                    <div class="quiz-icon">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-leaf"></i>
+                        <span>Nutrição Saudável</span>
+                    </div>
+                    <p>Promovendo saúde e bem-estar através da alimentação equilibrada.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Nutrição Saudável. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="nutricao.js"></script>
+
+    <script>
+   
+    (function(){
+        const btn = document.getElementById('quickNavBtn');
+        const panel = document.getElementById('quickNavPanel');
+        const close = document.getElementById('quickNavClose');
+        const links = Array.from(document.querySelectorAll('.quick-nav-link'));
+        const firstLink = links[0];
+
+        function openPanel() {
+            panel.style.display = 'flex';
+            panel.setAttribute('aria-hidden', 'false');
+           
+            setTimeout(() => {
+                panel.classList.add('show');
+            }, 10);
+            
+           
+            btn.classList.add('pulse');
+            
+          
+            if (firstLink) firstLink.focus();
+        }
+        function closePanel() {
+            panel.classList.remove('show');
+            btn.classList.remove('pulse');
+            
+          
+            setTimeout(() => {
+                panel.style.display = 'none';
+                panel.setAttribute('aria-hidden', 'true');
+            }, 300);
+            
+            btn.focus();
+        }
+
+        btn.addEventListener('click', function(e){
+            e.stopPropagation();
+            
+          
+            btn.classList.add('clicked');
+            setTimeout(() => {
+                btn.classList.remove('clicked');
+            }, 600);
+            
+            const isOpen = panel.style.display === 'flex';
+            if (isOpen) closePanel(); else openPanel();
+        });
+
+        close.addEventListener('click', function(e){ e.stopPropagation(); closePanel(); });
+
+       
+        document.addEventListener('click', function(e){
+            if (!panel.contains(e.target) && e.target !== btn) closePanel();
+        });
+
+       
+        document.addEventListener('keydown', function(e){
+            if (e.key === 'Escape' || e.key === 'Esc') {
+                if (panel.style.display === 'flex') closePanel();
+            }
+        });
+
+        
+        window.addEventListener('resize', function(){ closePanel(); });
+
+       
+        links.forEach(link => {
+            if (link.getAttribute('href').startsWith('#')) {
+                link.addEventListener('click', function(e){
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').slice(1);
+                    const targetEl = document.getElementById(targetId);
+                    if (targetEl) {
+                        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    } else {
+                       
+                        window.location.href = this.getAttribute('href');
+                    }
+                    closePanel();
+                });
+            }
+        });
+    })();
+    </script>
+</body>
+</html>

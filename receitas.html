@@ -1,0 +1,1962 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Receitas saudáveis sem glúten e sem açúcar - Deliciosas opções para uma alimentação equilibrada">
+    <title>Receitas Saudáveis - Sem Glúten e Sem Açúcar</title>
+    <link rel="stylesheet" href="nutricao.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .recipes-hero {
+            padding: 140px 0 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+            text-align: center;
+        }
+
+        .recipes-hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .recipes-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .recipes-section {
+            padding: 80px 0;
+            background: var(--background-light);
+        }
+
+        .recipes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .recipe-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .recipe-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .recipe-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .recipe-header h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .recipe-badges {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .recipe-content {
+            padding: 1.5rem;
+        }
+
+        .recipe-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .recipe-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .recipe-section h4 {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .recipe-section h4 i {
+            font-size: 1rem;
+        }
+
+        .ingredients-list,
+        .instructions-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .ingredients-list li,
+        .instructions-list li {
+            padding: 0.6rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .ingredients-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .instructions-list li {
+            counter-increment: step-counter;
+        }
+
+        .instructions-list {
+            counter-reset: step-counter;
+        }
+
+        .instructions-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            background: var(--primary-color);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .recipe-info {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            flex-wrap: wrap;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .info-item i {
+            color: var(--success-color);
+        }
+
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .search-box {
+            position: relative;
+            width: 100%;
+            z-index: 2;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3.5rem;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            background: white;
+            color: var(--text-primary);
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            z-index: 100;
+            cursor: text;
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+            pointer-events: auto;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(45, 90, 39, 0.1), var(--shadow-md);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-light);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            pointer-events: none;
+        }
+
+        .search-results-info {
+            margin-top: 1rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .search-results-info.hidden {
+            display: none;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-secondary);
+        }
+
+        .no-results i {
+            font-size: 3rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .no-results h3 {
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .no-results.hidden {
+            display: none;
+        }
+
+        .recipe-card.hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .recipes-hero h1 {
+                font-size: 2rem;
+            }
+
+            .recipes-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        .quick-nav-btn {
+            position: relative;
+            background: linear-gradient(135deg, #2d5a27 0%, #4a7c59 50%, #2a9d8f 100%);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 
+                0 4px 15px rgba(45, 90, 39, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            font-size: 20px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            overflow: hidden;
+        }
+        
+        .quick-nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .quick-nav-btn:hover::before {
+            left: 100%;
+        }
+        
+        .quick-nav-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: floatParticle 3s ease-in-out infinite;
+        }
+        
+        @keyframes floatParticle {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .quick-nav-btn:hover {
+            background: linear-gradient(135deg, #1e3d1a 0%, #2d5a27 50%, #1a3d1a 100%);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 
+                0 8px 25px rgba(45, 90, 39, 0.4),
+                0 0 0 2px rgba(255, 255, 255, 0.2),
+                inset 0 2px 0 rgba(255, 255, 255, 0.3);
+        }
+        
+        .quick-nav-btn:active {
+            transform: translateY(0) scale(0.98);
+            box-shadow: 
+                0 4px 15px rgba(45, 90, 39, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.3);
+        }
+        
+        .quick-nav-btn i {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .quick-nav-btn:hover i {
+            transform: rotate(90deg) scale(1.1);
+        }
+        
+        .quick-nav-btn:hover::after {
+            animation: ripple 0.6s ease-out;
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(4);
+                opacity: 0;
+            }
+        }
+        
+        .quick-nav-btn.clicked {
+            animation: clickRipple 0.6s ease-out;
+        }
+        
+        @keyframes clickRipple {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            }
+            50% {
+                transform: scale(1.2);
+                box-shadow: 0 8px 30px rgba(39, 174, 96, 0.6);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            }
+        }
+        
+        .quick-nav-panel {
+            position: absolute;
+            right: 0;
+            top: calc(100% + 8px);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 250, 0.9) 100%);
+            backdrop-filter: blur(25px);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.15),
+                0 0 0 1px rgba(255, 255, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1000;
+            min-width: 220px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            opacity: 0;
+            transform: translateY(-15px) scale(0.9);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+        }
+        
+        .quick-nav-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+        }
+        
+        .quick-nav-panel.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            animation: slideInFromTop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        @keyframes slideInFromTop {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px) scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .quick-nav-panel a { 
+            color: #2c3e50; 
+            text-decoration: none; 
+            padding: 14px 18px; 
+            border-radius: 12px; 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-weight: 600;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .quick-nav-panel a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(45, 90, 39, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .quick-nav-panel a:hover::before {
+            left: 100%;
+        }
+        
+        .quick-nav-panel a:hover { 
+            background: linear-gradient(135deg, rgba(45, 90, 39, 0.15), rgba(74, 124, 89, 0.15), rgba(42, 157, 143, 0.1));
+            color: #2d5a27;
+            transform: translateX(8px) scale(1.02); 
+            box-shadow: 
+                0 8px 20px rgba(45, 90, 39, 0.2),
+                0 0 0 1px rgba(45, 90, 39, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            border-color: rgba(45, 90, 39, 0.2);
+        }
+        
+        .quick-nav-panel a i {
+            font-size: 18px;
+            width: 22px;
+            text-align: center;
+            transition: all 0.3s ease;
+            color: #2d5a27;
+        }
+        
+        .quick-nav-panel a:hover i {
+            transform: scale(1.1) rotate(5deg);
+            color: #1e3d1a;
+        }
+        
+        .quick-nav-close { 
+            align-self: flex-end; 
+            font-size: 22px; 
+            color: #7f8c8d; 
+            cursor: pointer; 
+            padding: 10px; 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 12px;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .quick-nav-close::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .quick-nav-close:hover::before {
+            left: 100%;
+        }
+        
+        .quick-nav-close:hover {
+            color: #e74c3c;
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.15), rgba(231, 76, 60, 0.1));
+            transform: scale(1.1);
+            box-shadow: 
+                0 6px 15px rgba(231, 76, 60, 0.2),
+                0 0 0 1px rgba(231, 76, 60, 0.1);
+            border-color: rgba(231, 76, 60, 0.2);
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 
+                    0 8px 25px rgba(45, 90, 39, 0.3),
+                    0 0 0 0px rgba(45, 90, 39, 0.1);
+            }
+            50% {
+                box-shadow: 
+                    0 12px 35px rgba(45, 90, 39, 0.5),
+                    0 0 0 15px rgba(45, 90, 39, 0.1),
+                    0 0 0 30px rgba(45, 90, 39, 0.05);
+            }
+            100% {
+                box-shadow: 
+                    0 8px 25px rgba(45, 90, 39, 0.3),
+                    0 0 0 0px rgba(45, 90, 39, 0.1);
+            }
+        }
+        
+        .quick-nav-btn.pulse {
+            animation: pulse 2.5s infinite;
+        }
+        
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            position: relative;
+        }
+        
+        @media (max-width: 768px) { 
+            .quick-nav-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+            }
+            
+            .quick-nav-panel { 
+                right: 0; 
+                left: auto; 
+                min-width: 200px;
+                padding: 15px;
+            } 
+        }
+        
+        @media (max-width: 480px) {
+            .quick-nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
+            }
+            
+            .quick-nav-panel {
+                right: 0;
+                left: auto;
+                min-width: 180px;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <i class="fas fa-leaf"></i>
+                    <span>Info Nutri</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="nutricao.html" class="nav-link">Início</a></li>
+                    <li><a href="nutricao.html#sobre" class="nav-link">Sobre</a></li>
+                    <li><a href="nutricao.html#nutrientes" class="nav-link">Nutrientes</a></li>
+                    <li><a href="nutricao.html#alimentos" class="nav-link">Alimentos</a></li>
+                    <li><a href="nutricao.html#dicas" class="nav-link">Dicas</a></li>
+                    <li><a href="receitas.html" class="nav-link">Receitas</a></li>
+                    <li><a href="quiz-saude.html" class="nav-link">Quiz de Saúde</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="quick-nav-btn" id="quickNavBtn" aria-label="Navegação rápida">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="quick-nav-panel" id="quickNavPanel" aria-hidden="true">
+                        <span class="quick-nav-close" id="quickNavClose" title="Fechar">&times;</span>
+                        <a href="nutricao.html" class="quick-nav-link">
+                            <i class="fas fa-home"></i>
+                            Início
+                        </a>
+                        <a href="nutricao.html#sobre" class="quick-nav-link">
+                            <i class="fas fa-info-circle"></i>
+                            Sobre
+                        </a>
+                        <a href="nutricao.html#nutrientes" class="quick-nav-link">
+                            <i class="fas fa-apple-alt"></i>
+                            Nutrientes
+                        </a>
+                        <a href="nutricao.html#alimentos" class="quick-nav-link">
+                            <i class="fas fa-utensils"></i>
+                            Alimentos
+                        </a>
+                        <a href="nutricao.html#dicas" class="quick-nav-link">
+                            <i class="fas fa-lightbulb"></i>
+                            Dicas
+                        </a>
+                        <a href="receitas.html" class="quick-nav-link">
+                            <i class="fas fa-book-open"></i>
+                            Receitas
+                        </a>
+                        <a href="quiz-saude.html" class="quick-nav-link">
+                            <i class="fas fa-clipboard-check"></i>
+                            Quiz de Saúde
+                        </a>
+                    </div>
+                    <div class="hamburger">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="recipes-hero">
+        <div class="container">
+            <h1><i class="fas fa-utensils"></i> Receitas Saudáveis</h1>
+            <p>27 receitas deliciosas sem glúten e sem açúcar para uma alimentação equilibrada e nutritiva</p>
+        </div>
+    </section>
+
+    <section class="recipes-section">
+        <div class="container">
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" 
+                           id="searchInput" 
+                           class="search-input" 
+                           placeholder="Pesquisar receitas por nome ou ingrediente...">
+                </div>
+                <div class="search-results-info hidden" id="searchResultsInfo"></div>
+            </div>
+            
+            <div class="no-results hidden" id="noResults">
+                <i class="fas fa-search"></i>
+                <h3>Nenhuma receita encontrada</h3>
+                <p>Tente pesquisar por outro termo ou ingrediente</p>
+            </div>
+            
+            <div class="recipes-grid" id="recipesGrid">
+                <!-- Receita 1 -->
+                <div class="recipe-card">
+                    <div class="recipe-header">
+                        <h3>Pão de Banana com Aveia</h3>
+                        <div class="recipe-badges">
+                            <span class="badge">Sem Glúten</span>
+                            <span class="badge">Sem Açúcar</span>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-shopping-basket"></i> Ingredientes</h4>
+                            <ul class="ingredients-list">
+                                <li>3 bananas maduras amassadas</li>
+                                <li>2 ovos</li>
+                                <li>1/2 xícara de óleo de coco</li>
+                                <li>1 xícara de farinha de aveia</li>
+                                <li>1/2 xícara de farinha de amêndoas</li>
+                                <li>1 colher de chá de canela em pó</li>
+                                <li>1 colher de chá de fermento em pó</li>
+                                <li>1 pitada de sal</li>
+                            </ul>
+                        </div>
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-tasks"></i> Modo de Preparo</h4>
+                            <ol class="instructions-list">
+                                <li>Pré-aqueça o forno a 180°C e unte uma forma de pão.</li>
+                                <li>Em uma tigela, misture as bananas amassadas, ovos e óleo de coco.</li>
+                                <li>Adicione as farinhas, canela, fermento e sal. Misture bem.</li>
+                                <li>Despeje na forma e asse por 40-45 minutos ou até dourar.</li>
+                                <li>Deixe esfriar antes de desenformar.</li>
+                            </ol>
+                        </div>
+                        <div class="recipe-info">
+                            <div class="info-item"><i class="fas fa-clock"></i> 50 min</div>
+                            <div class="info-item"><i class="fas fa-users"></i> 8 porções</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Receita 2 -->
+                <div class="recipe-card">
+                    <div class="recipe-header">
+                        <h3>Bolinho de Frango com Quinoa</h3>
+                        <div class="recipe-badges">
+                            <span class="badge">Sem Glúten</span>
+                            <span class="badge">Sem Açúcar</span>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-shopping-basket"></i> Ingredientes</h4>
+                            <ul class="ingredients-list">
+                                <li>500g de peito de frango moído</li>
+                                <li>1 xícara de quinoa cozida</li>
+                                <li>1 cebola pequena picada</li>
+                                <li>2 dentes de alho amassados</li>
+                                <li>1 ovo</li>
+                                <li>Salsinha e cebolinha a gosto</li>
+                                <li>Sal e pimenta a gosto</li>
+                                <li>Óleo de coco para fritar</li>
+                            </ul>
+                        </div>
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-tasks"></i> Modo de Preparo</h4>
+                            <ol class="instructions-list">
+                                <li>Misture todos os ingredientes em uma tigela grande.</li>
+                                <li>Modele bolinhos com as mãos úmidas.</li>
+                                <li>Aqueça o óleo de coco em uma frigideira.</li>
+                                <li>Frite os bolinhos até ficarem dourados dos dois lados.</li>
+                                <li>Sirva quente com salada.</li>
+                            </ol>
+                        </div>
+                        <div class="recipe-info">
+                            <div class="info-item"><i class="fas fa-clock"></i> 30 min</div>
+                            <div class="info-item"><i class="fas fa-users"></i> 4 porções</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Receita 3 -->
+                <div class="recipe-card">
+                    <div class="recipe-header">
+                        <h3>Salada de Quinoa com Vegetais</h3>
+                        <div class="recipe-badges">
+                            <span class="badge">Sem Glúten</span>
+                            <span class="badge">Sem Açúcar</span>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-shopping-basket"></i> Ingredientes</h4>
+                            <ul class="ingredients-list">
+                                <li>1 xícara de quinoa cozida</li>
+                                <li>1 pepino picado</li>
+                                <li>2 tomates picados</li>
+                                <li>1 pimentão vermelho picado</li>
+                                <li>1/2 xícara de azeitonas</li>
+                                <li>Suco de 1 limão</li>
+                                <li>Azeite de oliva extra virgem</li>
+                                <li>Sal, pimenta e ervas frescas</li>
+                            </ul>
+                        </div>
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-tasks"></i> Modo de Preparo</h4>
+                            <ol class="instructions-list">
+                                <li>Cozinhe a quinoa conforme instruções da embalagem e deixe esfriar.</li>
+                                <li>Em uma tigela grande, misture a quinoa com os vegetais picados.</li>
+                                <li>Adicione as azeitonas.</li>
+                                <li>Tempere com suco de limão, azeite, sal, pimenta e ervas.</li>
+                                <li>Misture bem e sirva frio.</li>
+                            </ol>
+                        </div>
+                        <div class="recipe-info">
+                            <div class="info-item"><i class="fas fa-clock"></i> 20 min</div>
+                            <div class="info-item"><i class="fas fa-users"></i> 4 porções</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Receita 4 -->
+                <div class="recipe-card">
+                    <div class="recipe-header">
+                        <h3>Panqueca de Aveia e Ovos</h3>
+                        <div class="recipe-badges">
+                            <span class="badge">Sem Glúten</span>
+                            <span class="badge">Sem Açúcar</span>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-shopping-basket"></i> Ingredientes</h4>
+                            <ul class="ingredients-list">
+                                <li>2 ovos</li>
+                                <li>1/2 xícara de aveia em flocos</li>
+                                <li>1 banana amassada</li>
+                                <li>1 colher de chá de canela</li>
+                                <li>1 pitada de sal</li>
+                                <li>Óleo de coco para untar</li>
+                            </ul>
+                        </div>
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-tasks"></i> Modo de Preparo</h4>
+                            <ol class="instructions-list">
+                                <li>Bata todos os ingredientes no liquidificador até ficar homogêneo.</li>
+                                <li>Aqueça uma frigideira antiaderente com um pouco de óleo de coco.</li>
+                                <li>Despeje uma concha da massa e espalhe formando um círculo.</li>
+                                <li>Cozinhe por 2-3 minutos de cada lado até dourar.</li>
+                                <li>Repita com o restante da massa.</li>
+                            </ol>
+                        </div>
+                        <div class="recipe-info">
+                            <div class="info-item"><i class="fas fa-clock"></i> 15 min</div>
+                            <div class="info-item"><i class="fas fa-users"></i> 2 porções</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Receita 5 -->
+                <div class="recipe-card">
+                    <div class="recipe-header">
+                        <h3>Frango Grelhado com Legumes</h3>
+                        <div class="recipe-badges">
+                            <span class="badge">Sem Glúten</span>
+                            <span class="badge">Sem Açúcar</span>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-shopping-basket"></i> Ingredientes</h4>
+                            <ul class="ingredients-list">
+                                <li>4 filés de peito de frango</li>
+                                <li>2 abobrinhas cortadas em rodelas</li>
+                                <li>2 cenouras cortadas em palitos</li>
+                                <li>1 pimentão cortado em tiras</li>
+                                <li>Azeite de oliva</li>
+                                <li>Alho, sal, pimenta e ervas</li>
+                            </ul>
+                        </div>
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-tasks"></i> Modo de Preparo</h4>
+                            <ol class="instructions-list">
+                                <li>Tempere o frango com alho, sal, pimenta e ervas.</li>
+                                <li>Grelhe o frango em uma frigideira ou grelha por 6-7 minutos de cada lado.</li>
+                                <li>Em outra panela, refogue os legumes com azeite.</li>
+                                <li>Cozinhe os legumes até ficarem macios mas crocantes.</li>
+                                <li>Sirva o frango com os legumes grelhados.</li>
+                            </ol>
+                        </div>
+                        <div class="recipe-info">
+                            <div class="info-item"><i class="fas fa-clock"></i> 25 min</div>
+                            <div class="info-item"><i class="fas fa-users"></i> 4 porções</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Receita 6 -->
+                <div class="recipe-card">
+                    <div class="recipe-header">
+                        <h3>Smoothie Verde Energético</h3>
+                        <div class="recipe-badges">
+                            <span class="badge">Sem Glúten</span>
+                            <span class="badge">Sem Açúcar</span>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-shopping-basket"></i> Ingredientes</h4>
+                            <ul class="ingredients-list">
+                                <li>2 xícaras de espinafre fresco</li>
+                                <li>1 banana congelada</li>
+                                <li>1/2 abacate</li>
+                                <li>1 xícara de água de coco</li>
+                                <li>1 colher de sopa de sementes de chia</li>
+                                <li>Gelo a gosto</li>
+                            </ul>
+                        </div>
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-tasks"></i> Modo de Preparo</h4>
+                            <ol class="instructions-list">
+                                <li>Coloque todos os ingredientes no liquidificador.</li>
+                                <li>Bata em alta velocidade até ficar cremoso.</li>
+                                <li>Se necessário, adicione mais água de coco para ajustar a consistência.</li>
+                                <li>Sirva imediatamente.</li>
+                            </ol>
+                        </div>
+                        <div class="recipe-info">
+                            <div class="info-item"><i class="fas fa-clock"></i> 5 min</div>
+                            <div class="info-item"><i class="fas fa-users"></i> 2 porções</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Receita 7 -->
+                <div class="recipe-card">
+                    <div class="recipe-header">
+                        <h3>Hambúrguer de Grão-de-bico</h3>
+                        <div class="recipe-badges">
+                            <span class="badge">Sem Glúten</span>
+                            <span class="badge">Sem Açúcar</span>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-shopping-basket"></i> Ingredientes</h4>
+                            <ul class="ingredients-list">
+                                <li>2 xícaras de grão-de-bico cozido</li>
+                                <li>1/2 cebola picada</li>
+                                <li>2 dentes de alho</li>
+                                <li>1/2 xícara de farinha de amêndoas</li>
+                                <li>1 ovo</li>
+                                <li>Cominho, coentro e sal a gosto</li>
+                                <li>Óleo de coco para fritar</li>
+                            </ul>
+                        </div>
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-tasks"></i> Modo de Preparo</h4>
+                            <ol class="instructions-list">
+                                <li>Amasse o grão-de-bico com um garfo ou processe levemente.</li>
+                                <li>Misture com cebola, alho, farinha de amêndoas e ovo.</li>
+                                <li>Tempere com cominho, coentro e sal.</li>
+                                <li>Modele hambúrgueres e frite em óleo de coco.</li>
+                                <li>Doure dos dois lados e sirva.</li>
+                            </ol>
+                        </div>
+                        <div class="recipe-info">
+                            <div class="info-item"><i class="fas fa-clock"></i> 30 min</div>
+                            <div class="info-item"><i class="fas fa-users"></i> 4 porções</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Receita 8 -->
+                <div class="recipe-card">
+                    <div class="recipe-header">
+                        <h3>Omelete de Espinafre e Queijo</h3>
+                        <div class="recipe-badges">
+                            <span class="badge">Sem Glúten</span>
+                            <span class="badge">Sem Açúcar</span>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-shopping-basket"></i> Ingredientes</h4>
+                            <ul class="ingredients-list">
+                                <li>3 ovos</li>
+                                <li>1 xícara de espinafre fresco</li>
+                                <li>50g de queijo minas ralado</li>
+                                <li>1 colher de sopa de azeite</li>
+                                <li>Sal e pimenta a gosto</li>
+                            </ul>
+                        </div>
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-tasks"></i> Modo de Preparo</h4>
+                            <ol class="instructions-list">
+                                <li>Bata os ovos com sal e pimenta.</li>
+                                <li>Aqueça o azeite em uma frigideira.</li>
+                                <li>Adicione o espinafre e refogue rapidamente.</li>
+                                <li>Despeje os ovos batidos sobre o espinafre.</li>
+                                <li>Quando começar a firmar, adicione o queijo e dobre a omelete.</li>
+                            </ol>
+                        </div>
+                        <div class="recipe-info">
+                            <div class="info-item"><i class="fas fa-clock"></i> 10 min</div>
+                            <div class="info-item"><i class="fas fa-users"></i> 1 porção</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Receita 9 -->
+                <div class="recipe-card">
+                    <div class="recipe-header">
+                        <h3>Abobrinha Recheada</h3>
+                        <div class="recipe-badges">
+                            <span class="badge">Sem Glúten</span>
+                            <span class="badge">Sem Açúcar</span>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-shopping-basket"></i> Ingredientes</h4>
+                            <ul class="ingredients-list">
+                                <li>4 abobrinhas médias</li>
+                                <li>300g de carne moída</li>
+                                <li>1 cebola picada</li>
+                                <li>2 tomates picados</li>
+                                <li>Queijo ralado a gosto</li>
+                                <li>Alho, sal, pimenta e ervas</li>
+                            </ul>
+                        </div>
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-tasks"></i> Modo de Preparo</h4>
+                            <ol class="instructions-list">
+                                <li>Corte as abobrinhas ao meio no sentido do comprimento.</li>
+                                <li>Retire a polpa com uma colher, reservando.</li>
+                                <li>Refogue a carne com cebola, alho e a polpa da abobrinha.</li>
+                                <li>Adicione os tomates e temperos.</li>
+                                <li>Recheie as abobrinhas, cubra com queijo e asse a 180°C por 30 minutos.</li>
+                            </ol>
+                        </div>
+                        <div class="recipe-info">
+                            <div class="info-item"><i class="fas fa-clock"></i> 50 min</div>
+                            <div class="info-item"><i class="fas fa-users"></i> 4 porções</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Receita 10 -->
+                <div class="recipe-card">
+                    <div class="recipe-header">
+                        <h3>Bolo de Cenoura com Cacau</h3>
+                        <div class="recipe-badges">
+                            <span class="badge">Sem Glúten</span>
+                            <span class="badge">Sem Açúcar</span>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-shopping-basket"></i> Ingredientes</h4>
+                            <ul class="ingredients-list">
+                                <li>3 cenouras médias raladas</li>
+                                <li>3 ovos</li>
+                                <li>1/2 xícara de óleo de coco</li>
+                                <li>1 xícara de farinha de amêndoas</li>
+                                <li>1/2 xícara de cacau em pó</li>
+                                <li>1 colher de chá de fermento em pó</li>
+                                <li>Canela e noz-moscada a gosto</li>
+                            </ul>
+                        </div>
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-tasks"></i> Modo de Preparo</h4>
+                            <ol class="instructions-list">
+                                <li>Bata as cenouras, ovos e óleo no liquidificador.</li>
+                                <li>Misture as farinhas, cacau, fermento e especiarias.</li>
+                                <li>Junte os ingredientes líquidos aos secos.</li>
+                                <li>Despeje em forma untada e asse a 180°C por 35-40 minutos.</li>
+                                <li>Deixe esfriar antes de desenformar.</li>
+                            </ol>
+                        </div>
+                        <div class="recipe-info">
+                            <div class="info-item"><i class="fas fa-clock"></i> 50 min</div>
+                            <div class="info-item"><i class="fas fa-users"></i> 8 porções</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Receita 11 -->
+                <div class="recipe-card">
+                    <div class="recipe-header">
+                        <h3>Salmão Grelhado com Aspargos</h3>
+                        <div class="recipe-badges">
+                            <span class="badge">Sem Glúten</span>
+                            <span class="badge">Sem Açúcar</span>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-shopping-basket"></i> Ingredientes</h4>
+                            <ul class="ingredients-list">
+                                <li>4 filés de salmão</li>
+                                <li>500g de aspargos</li>
+                                <li>Azeite de oliva</li>
+                                <li>Suco de limão</li>
+                                <li>Alho, sal, pimenta e ervas frescas</li>
+                            </ul>
+                        </div>
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-tasks"></i> Modo de Preparo</h4>
+                            <ol class="instructions-list">
+                                <li>Tempere o salmão com alho, suco de limão, sal e pimenta.</li>
+                                <li>Grelhe o salmão por 4-5 minutos de cada lado.</li>
+                                <li>Refogue os aspargos com azeite e alho.</li>
+                                <li>Cozinhe os aspargos até ficarem macios mas crocantes.</li>
+                                <li>Sirva o salmão com os aspargos e finalize com ervas frescas.</li>
+                            </ol>
+                        </div>
+                        <div class="recipe-info">
+                            <div class="info-item"><i class="fas fa-clock"></i> 20 min</div>
+                            <div class="info-item"><i class="fas fa-users"></i> 4 porções</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Receita 12 -->
+                <div class="recipe-card">
+                    <div class="recipe-header">
+                        <h3>Muffins de Ovos e Espinafre</h3>
+                        <div class="recipe-badges">
+                            <span class="badge">Sem Glúten</span>
+                            <span class="badge">Sem Açúcar</span>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-shopping-basket"></i> Ingredientes</h4>
+                            <ul class="ingredients-list">
+                                <li>6 ovos</li>
+                                <li>1 xícara de espinafre picado</li>
+                                <li>1/2 xícara de queijo ralado</li>
+                                <li>1/4 de cebola picada</li>
+                                <li>Sal, pimenta e ervas a gosto</li>
+                            </ul>
+                        </div>
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-tasks"></i> Modo de Preparo</h4>
+                            <ol class="instructions-list">
+                                <li>Pré-aqueça o forno a 180°C.</li>
+                                <li>Bata os ovos em uma tigela.</li>
+                                <li>Adicione espinafre, queijo, cebola e temperos.</li>
+                                <li>Distribua em forminhas de muffin untadas.</li>
+                                <li>Asse por 20-25 minutos até firmar.</li>
+                            </ol>
+                        </div>
+                        <div class="recipe-info">
+                            <div class="info-item"><i class="fas fa-clock"></i> 30 min</div>
+                            <div class="info-item"><i class="fas fa-users"></i> 6 porções</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Receita 13 -->
+                <div class="recipe-card">
+                    <div class="recipe-header">
+                        <h3>Risotto de Couve-Flor</h3>
+                        <div class="recipe-badges">
+                            <span class="badge">Sem Glúten</span>
+                            <span class="badge">Sem Açúcar</span>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-shopping-basket"></i> Ingredientes</h4>
+                            <ul class="ingredients-list">
+                                <li>1 couve-flor média processada em grãos</li>
+                                <li>1 cebola picada</li>
+                                <li>2 dentes de alho</li>
+                                <li>1/2 xícara de caldo de legumes</li>
+                                <li>Queijo parmesão ralado</li>
+                                <li>Azeite, sal e pimenta</li>
+                            </ul>
+                        </div>
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-tasks"></i> Modo de Preparo</h4>
+                            <ol class="instructions-list">
+                                <li>Processe a couve-flor até ficar em grãos pequenos.</li>
+                                <li>Refogue a cebola e alho no azeite.</li>
+                                <li>Adicione a couve-flor e cozinhe por 5 minutos.</li>
+                                <li>Adicione o caldo aos poucos, mexendo sempre.</li>
+                                <li>Finalize com queijo parmesão e sirva quente.</li>
+                            </ol>
+                        </div>
+                        <div class="recipe-info">
+                            <div class="info-item"><i class="fas fa-clock"></i> 25 min</div>
+                            <div class="info-item"><i class="fas fa-users"></i> 4 porções</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Receita 14 -->
+                <div class="recipe-card">
+                    <div class="recipe-header">
+                        <h3>Wrap de Alface com Frango</h3>
+                        <div class="recipe-badges">
+                            <span class="badge">Sem Glúten</span>
+                            <span class="badge">Sem Açúcar</span>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-shopping-basket"></i> Ingredientes</h4>
+                            <ul class="ingredients-list">
+                                <li>Folhas grandes de alface americana</li>
+                                <li>300g de peito de frango grelhado em tiras</li>
+                                <li>1 tomate picado</li>
+                                <li>1/2 pepino em rodelas</li>
+                                <li>Abacate em fatias</li>
+                                <li>Maionese caseira ou azeite</li>
+                            </ul>
+                        </div>
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-tasks"></i> Modo de Preparo</h4>
+                            <ol class="instructions-list">
+                                <li>Lave e seque as folhas de alface.</li>
+                                <li>Grelhe o frango e corte em tiras.</li>
+                                <li>Coloque o frango no centro de cada folha de alface.</li>
+                                <li>Adicione tomate, pepino e abacate.</li>
+                                <li>Regue com maionese ou azeite e enrole como um wrap.</li>
+                            </ol>
+                        </div>
+                        <div class="recipe-info">
+                            <div class="info-item"><i class="fas fa-clock"></i> 15 min</div>
+                            <div class="info-item"><i class="fas fa-users"></i> 4 porções</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Receita 15 -->
+                <div class="recipe-card">
+                    <div class="recipe-header">
+                        <h3>Pudim de Chia com Frutas</h3>
+                        <div class="recipe-badges">
+                            <span class="badge">Sem Glúten</span>
+                            <span class="badge">Sem Açúcar</span>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-shopping-basket"></i> Ingredientes</h4>
+                            <ul class="ingredients-list">
+                                <li>1/4 de xícara de sementes de chia</li>
+                                <li>1 xícara de leite de coco ou amêndoas</li>
+                                <li>1/2 colher de chá de baunilha</li>
+                                <li>Frutas frescas para servir (morango, mirtilo, etc.)</li>
+                                <li>Canela em pó</li>
+                            </ul>
+                        </div>
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-tasks"></i> Modo de Preparo</h4>
+                            <ol class="instructions-list">
+                                <li>Misture a chia com o leite e baunilha.</li>
+                                <li>Mexa bem e deixe descansar por 5 minutos.</li>
+                                <li>Mexa novamente para evitar grumos.</li>
+                                <li>Leve à geladeira por pelo menos 2 horas ou durante a noite.</li>
+                                <li>Sirva com frutas frescas e canela.</li>
+                            </ol>
+                        </div>
+                        <div class="recipe-info">
+                            <div class="info-item"><i class="fas fa-clock"></i> 10 min + geladeira</div>
+                            <div class="info-item"><i class="fas fa-users"></i> 2 porções</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Receita 16 -->
+                <div class="recipe-card">
+                    <div class="recipe-header">
+                        <h3>Espaguete de Abobrinha com Molho</h3>
+                        <div class="recipe-badges">
+                            <span class="badge">Sem Glúten</span>
+                            <span class="badge">Sem Açúcar</span>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-shopping-basket"></i> Ingredientes</h4>
+                            <ul class="ingredients-list">
+                                <li>4 abobrinhas médias</li>
+                                <li>400g de carne moída</li>
+                                <li>1 lata de tomate pelado</li>
+                                <li>1 cebola picada</li>
+                                <li>2 dentes de alho</li>
+                                <li>Manjericão, sal e pimenta</li>
+                                <li>Queijo parmesão ralado</li>
+                            </ul>
+                        </div>
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-tasks"></i> Modo de Preparo</h4>
+                            <ol class="instructions-list">
+                                <li>Use um espiralizador para fazer "espaguete" com as abobrinhas.</li>
+                                <li>Refogue a carne com cebola e alho.</li>
+                                <li>Adicione o tomate e deixe cozinhar por 15 minutos.</li>
+                                <li>Refogue rapidamente as abobrinhas em uma frigideira.</li>
+                                <li>Sirva o "espaguete" com o molho e queijo parmesão.</li>
+                            </ol>
+                        </div>
+                        <div class="recipe-info">
+                            <div class="info-item"><i class="fas fa-clock"></i> 30 min</div>
+                            <div class="info-item"><i class="fas fa-users"></i> 4 porções</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Receita 17 -->
+                <div class="recipe-card">
+                    <div class="recipe-header">
+                        <h3>Biscoitos de Amêndoas</h3>
+                        <div class="recipe-badges">
+                            <span class="badge">Sem Glúten</span>
+                            <span class="badge">Sem Açúcar</span>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-shopping-basket"></i> Ingredientes</h4>
+                            <ul class="ingredients-list">
+                                <li>2 xícaras de farinha de amêndoas</li>
+                                <li>1/4 de xícara de óleo de coco</li>
+                                <li>1 ovo</li>
+                                <li>1 colher de chá de baunilha</li>
+                                <li>1 pitada de sal</li>
+                                <li>Canela a gosto</li>
+                            </ul>
+                        </div>
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-tasks"></i> Modo de Preparo</h4>
+                            <ol class="instructions-list">
+                                <li>Pré-aqueça o forno a 180°C.</li>
+                                <li>Misture todos os ingredientes até formar uma massa homogênea.</li>
+                                <li>Modele bolinhas e achate levemente.</li>
+                                <li>Coloque em assadeira forrada e asse por 12-15 minutos.</li>
+                                <li>Deixe esfriar antes de servir.</li>
+                            </ol>
+                        </div>
+                        <div class="recipe-info">
+                            <div class="info-item"><i class="fas fa-clock"></i> 25 min</div>
+                            <div class="info-item"><i class="fas fa-users"></i> 20 unidades</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Receita 18 -->
+                <div class="recipe-card">
+                    <div class="recipe-header">
+                        <h3>Salada de Atum com Abacate</h3>
+                        <div class="recipe-badges">
+                            <span class="badge">Sem Glúten</span>
+                            <span class="badge">Sem Açúcar</span>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-shopping-basket"></i> Ingredientes</h4>
+                            <ul class="ingredients-list">
+                                <li>2 latas de atum em água</li>
+                                <li>1 abacate maduro picado</li>
+                                <li>1/2 cebola roxa picada</li>
+                                <li>Suco de 1 limão</li>
+                                <li>Azeite de oliva</li>
+                                <li>Coentro fresco, sal e pimenta</li>
+                            </ul>
+                        </div>
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-tasks"></i> Modo de Preparo</h4>
+                            <ol class="instructions-list">
+                                <li>Escorra bem o atum.</li>
+                                <li>Em uma tigela, misture o atum com abacate e cebola.</li>
+                                <li>Adicione suco de limão, azeite e temperos.</li>
+                                <li>Misture delicadamente para não amassar o abacate.</li>
+                                <li>Sirva fresco com folhas verdes ou em wraps de alface.</li>
+                            </ol>
+                        </div>
+                        <div class="recipe-info">
+                            <div class="info-item"><i class="fas fa-clock"></i> 10 min</div>
+                            <div class="info-item"><i class="fas fa-users"></i> 3 porções</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Receita 19 -->
+                <div class="recipe-card">
+                    <div class="recipe-header">
+                        <h3>Frango ao Curry com Leite de Coco</h3>
+                        <div class="recipe-badges">
+                            <span class="badge">Sem Glúten</span>
+                            <span class="badge">Sem Açúcar</span>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-shopping-basket"></i> Ingredientes</h4>
+                            <ul class="ingredients-list">
+                                <li>600g de peito de frango em cubos</li>
+                                <li>1 lata de leite de coco</li>
+                                <li>1 cebola picada</li>
+                                <li>2 colheres de sopa de curry em pó</li>
+                                <li>1 colher de chá de gengibre ralado</li>
+                                <li>2 dentes de alho</li>
+                                <li>Sal e pimenta</li>
+                            </ul>
+                        </div>
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-tasks"></i> Modo de Preparo</h4>
+                            <ol class="instructions-list">
+                                <li>Refogue a cebola, alho e gengibre no azeite.</li>
+                                <li>Adicione o curry e mexa por 1 minuto.</li>
+                                <li>Adicione o frango e doure por 5 minutos.</li>
+                                <li>Adicione o leite de coco e deixe cozinhar por 15 minutos.</li>
+                                <li>Ajuste os temperos e sirva com arroz de couve-flor.</li>
+                            </ol>
+                        </div>
+                        <div class="recipe-info">
+                            <div class="info-item"><i class="fas fa-clock"></i> 30 min</div>
+                            <div class="info-item"><i class="fas fa-users"></i> 4 porções</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Receita 20 -->
+                <div class="recipe-card">
+                    <div class="recipe-header">
+                        <h3>Bowl de Açaí com Frutas</h3>
+                        <div class="recipe-badges">
+                            <span class="badge">Sem Glúten</span>
+                            <span class="badge">Sem Açúcar</span>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-shopping-basket"></i> Ingredientes</h4>
+                            <ul class="ingredients-list">
+                                <li>2 polpas de açaí congeladas</li>
+                                <li>1 banana congelada</li>
+                                <li>1/2 xícara de leite de coco</li>
+                                <li>Frutas frescas (morango, mirtilo, kiwi)</li>
+                                <li>Granola sem açúcar (opcional)</li>
+                                <li>Sementes de chia</li>
+                            </ul>
+                        </div>
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-tasks"></i> Modo de Preparo</h4>
+                            <ol class="instructions-list">
+                                <li>Bata o açaí, banana e leite de coco no liquidificador.</li>
+                                <li>Despeje em uma tigela.</li>
+                                <li>Decore com as frutas frescas.</li>
+                                <li>Adicione granola e sementes de chia por cima.</li>
+                                <li>Sirva imediatamente.</li>
+                            </ol>
+                        </div>
+                        <div class="recipe-info">
+                            <div class="info-item"><i class="fas fa-clock"></i> 10 min</div>
+                            <div class="info-item"><i class="fas fa-users"></i> 2 porções</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Receita 21 - Suco Verde Detox -->
+                <div class="recipe-card">
+                    <div class="recipe-header">
+                        <h3>Suco Verde Detox</h3>
+                        <div class="recipe-badges">
+                            <span class="badge">Sem Glúten</span>
+                            <span class="badge">Sem Açúcar</span>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-shopping-basket"></i> Ingredientes</h4>
+                            <ul class="ingredients-list">
+                                <li>2 folhas de couve</li>
+                                <li>1 pepino médio</li>
+                                <li>1 maçã verde</li>
+                                <li>1/2 limão espremido</li>
+                                <li>1 pedaço pequeno de gengibre</li>
+                                <li>300ml de água gelada</li>
+                                <li>Gelo a gosto</li>
+                            </ul>
+                        </div>
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-tasks"></i> Modo de Preparo</h4>
+                            <ol class="instructions-list">
+                                <li>Lave bem todos os ingredientes.</li>
+                                <li>Retire o talo central da couve.</li>
+                                <li>Pique a maçã e o pepino em pedaços.</li>
+                                <li>Coloque todos os ingredientes no liquidificador.</li>
+                                <li>Bata em alta velocidade por 1 minuto.</li>
+                                <li>Coe se desejar e sirva imediatamente com gelo.</li>
+                            </ol>
+                        </div>
+                        <div class="recipe-info">
+                            <div class="info-item"><i class="fas fa-clock"></i> 5 min</div>
+                            <div class="info-item"><i class="fas fa-users"></i> 2 porções</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Receita 22 - Suco de Laranja com Cenoura -->
+                <div class="recipe-card">
+                    <div class="recipe-header">
+                        <h3>Suco de Laranja com Cenoura</h3>
+                        <div class="recipe-badges">
+                            <span class="badge">Sem Glúten</span>
+                            <span class="badge">Sem Açúcar</span>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-shopping-basket"></i> Ingredientes</h4>
+                            <ul class="ingredients-list">
+                                <li>4 laranjas espremidas</li>
+                                <li>2 cenouras médias</li>
+                                <li>1 pedaço pequeno de gengibre</li>
+                                <li>Gelo a gosto</li>
+                            </ul>
+                        </div>
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-tasks"></i> Modo de Preparo</h4>
+                            <ol class="instructions-list">
+                                <li>Esprema as laranjas e reserve o suco.</li>
+                                <li>Descasque e pique as cenouras.</li>
+                                <li>Coloque o suco de laranja, cenouras e gengibre no liquidificador.</li>
+                                <li>Bata até ficar homogêneo.</li>
+                                <li>Coe e sirva com gelo.</li>
+                            </ol>
+                        </div>
+                        <div class="recipe-info">
+                            <div class="info-item"><i class="fas fa-clock"></i> 8 min</div>
+                            <div class="info-item"><i class="fas fa-users"></i> 2 porções</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Receita 23 - Suco de Melancia com Hortelã -->
+                <div class="recipe-card">
+                    <div class="recipe-header">
+                        <h3>Suco de Melancia com Hortelã</h3>
+                        <div class="recipe-badges">
+                            <span class="badge">Sem Glúten</span>
+                            <span class="badge">Sem Açúcar</span>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-shopping-basket"></i> Ingredientes</h4>
+                            <ul class="ingredients-list">
+                                <li>4 fatias grandes de melancia sem sementes</li>
+                                <li>10 folhas de hortelã</li>
+                                <li>1/2 limão espremido</li>
+                                <li>Gelo a gosto</li>
+                            </ul>
+                        </div>
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-tasks"></i> Modo de Preparo</h4>
+                            <ol class="instructions-list">
+                                <li>Corte a melancia em cubos.</li>
+                                <li>Coloque no liquidificador com hortelã e suco de limão.</li>
+                                <li>Bata até ficar líquido.</li>
+                                <li>Passe por uma peneira fina para remover resíduos.</li>
+                                <li>Sirva bem gelado com gelo e folhas de hortelã para decorar.</li>
+                            </ol>
+                        </div>
+                        <div class="recipe-info">
+                            <div class="info-item"><i class="fas fa-clock"></i> 5 min</div>
+                            <div class="info-item"><i class="fas fa-users"></i> 2 porções</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Receita 24 - Suco de Abacaxi com Gengibre -->
+                <div class="recipe-card">
+                    <div class="recipe-header">
+                        <h3>Suco de Abacaxi com Gengibre</h3>
+                        <div class="recipe-badges">
+                            <span class="badge">Sem Glúten</span>
+                            <span class="badge">Sem Açúcar</span>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-shopping-basket"></i> Ingredientes</h4>
+                            <ul class="ingredients-list">
+                                <li>1/2 abacaxi médio descascado</li>
+                                <li>1 pedaço de 2cm de gengibre</li>
+                                <li>300ml de água de coco</li>
+                                <li>Gelo a gosto</li>
+                                <li>Folhas de hortelã para decorar</li>
+                            </ul>
+                        </div>
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-tasks"></i> Modo de Preparo</h4>
+                            <ol class="instructions-list">
+                                <li>Corte o abacaxi em pedaços pequenos.</li>
+                                <li>Descasque e rale o gengibre.</li>
+                                <li>Coloque abacaxi, gengibre e água de coco no liquidificador.</li>
+                                <li>Bata por 1 minuto até ficar homogêneo.</li>
+                                <li>Sirva com gelo e decore com hortelã.</li>
+                            </ol>
+                        </div>
+                        <div class="recipe-info">
+                            <div class="info-item"><i class="fas fa-clock"></i> 6 min</div>
+                            <div class="info-item"><i class="fas fa-users"></i> 2 porções</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Receita 25 - Suco de Beterraba com Maçã -->
+                <div class="recipe-card">
+                    <div class="recipe-header">
+                        <h3>Suco de Beterraba com Maçã</h3>
+                        <div class="recipe-badges">
+                            <span class="badge">Sem Glúten</span>
+                            <span class="badge">Sem Açúcar</span>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-shopping-basket"></i> Ingredientes</h4>
+                            <ul class="ingredients-list">
+                                <li>1 beterraba média crua</li>
+                                <li>2 maçãs verdes</li>
+                                <li>1/2 limão espremido</li>
+                                <li>300ml de água gelada</li>
+                                <li>Gelo a gosto</li>
+                            </ul>
+                        </div>
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-tasks"></i> Modo de Preparo</h4>
+                            <ol class="instructions-list">
+                                <li>Descasque e pique a beterraba em cubos.</li>
+                                <li>Retire o miolo das maçãs e pique em pedaços.</li>
+                                <li>Coloque beterraba, maçãs, suco de limão e água no liquidificador.</li>
+                                <li>Bata bem até ficar homogêneo.</li>
+                                <li>Coe e sirva imediatamente com gelo.</li>
+                            </ol>
+                        </div>
+                        <div class="recipe-info">
+                            <div class="info-item"><i class="fas fa-clock"></i> 7 min</div>
+                            <div class="info-item"><i class="fas fa-users"></i> 2 porções</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Receita 26 - Suco de Morango com Limão -->
+                <div class="recipe-card">
+                    <div class="recipe-header">
+                        <h3>Suco de Morango com Limão</h3>
+                        <div class="recipe-badges">
+                            <span class="badge">Sem Glúten</span>
+                            <span class="badge">Sem Açúcar</span>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-shopping-basket"></i> Ingredientes</h4>
+                            <ul class="ingredients-list">
+                                <li>200g de morangos frescos</li>
+                                <li>2 limões espremidos</li>
+                                <li>300ml de água gelada</li>
+                                <li>Gelo a gosto</li>
+                                <li>Folhas de hortelã</li>
+                            </ul>
+                        </div>
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-tasks"></i> Modo de Preparo</h4>
+                            <ol class="instructions-list">
+                                <li>Lave bem os morangos e retire os cabinhos.</li>
+                                <li>Esprema os limões e reserve o suco.</li>
+                                <li>Coloque morangos, suco de limão e água no liquidificador.</li>
+                                <li>Bata até ficar cremoso.</li>
+                                <li>Sirva com gelo e decore com folhas de hortelã.</li>
+                            </ol>
+                        </div>
+                        <div class="recipe-info">
+                            <div class="info-item"><i class="fas fa-clock"></i> 5 min</div>
+                            <div class="info-item"><i class="fas fa-users"></i> 2 porções</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Receita 27 - Suco de Couve com Abacaxi -->
+                <div class="recipe-card">
+                    <div class="recipe-header">
+                        <h3>Suco de Couve com Abacaxi</h3>
+                        <div class="recipe-badges">
+                            <span class="badge">Sem Glúten</span>
+                            <span class="badge">Sem Açúcar</span>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-shopping-basket"></i> Ingredientes</h4>
+                            <ul class="ingredients-list">
+                                <li>3 folhas de couve</li>
+                                <li>2 fatias grandes de abacaxi</li>
+                                <li>1/2 limão espremido</li>
+                                <li>300ml de água gelada</li>
+                                <li>Gelo a gosto</li>
+                            </ul>
+                        </div>
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-tasks"></i> Modo de Preparo</h4>
+                            <ol class="instructions-list">
+                                <li>Lave bem as folhas de couve e retire o talo central.</li>
+                                <li>Corte o abacaxi em pedaços.</li>
+                                <li>Coloque couve, abacaxi, suco de limão e água no liquidificador.</li>
+                                <li>Bata em alta velocidade por 1 minuto.</li>
+                                <li>Coe se necessário e sirva bem gelado.</li>
+                            </ol>
+                        </div>
+                        <div class="recipe-info">
+                            <div class="info-item"><i class="fas fa-clock"></i> 6 min</div>
+                            <div class="info-item"><i class="fas fa-users"></i> 2 porções</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Receita 28 - Suco de Uva Integral -->
+                <div class="recipe-card">
+                    <div class="recipe-header">
+                        <h3>Suco de Uva Integral</h3>
+                        <div class="recipe-badges">
+                            <span class="badge">Sem Glúten</span>
+                            <span class="badge">Sem Açúcar</span>
+                        </div>
+                    </div>
+                    <div class="recipe-content">
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-shopping-basket"></i> Ingredientes</h4>
+                            <ul class="ingredients-list">
+                                <li>300g de uvas roxas ou verdes</li>
+                                <li>200ml de água gelada</li>
+                                <li>Gelo a gosto</li>
+                                <li>Folhas de hortelã (opcional)</li>
+                            </ul>
+                        </div>
+                        <div class="recipe-section">
+                            <h4><i class="fas fa-tasks"></i> Modo de Preparo</h4>
+                            <ol class="instructions-list">
+                                <li>Lave bem as uvas.</li>
+                                <li>Coloque as uvas inteiras (com casca) no liquidificador.</li>
+                                <li>Adicione a água gelada.</li>
+                                <li>Bata por 30 segundos até ficar homogêneo.</li>
+                                <li>Passe por uma peneira para remover as sementes.</li>
+                                <li>Sirva com gelo e decore com hortelã se desejar.</li>
+                            </ol>
+                        </div>
+                        <div class="recipe-info">
+                            <div class="info-item"><i class="fas fa-clock"></i> 5 min</div>
+                            <div class="info-item"><i class="fas fa-users"></i> 2 porções</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-leaf"></i>
+                        <span>Nutrição Saudável</span>
+                    </div>
+                    <p>Promovendo saúde e bem-estar através da alimentação equilibrada.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Nutrição Saudável. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="nutricao.js"></script>
+
+    <script>
+        (function(){
+            const btn = document.getElementById('quickNavBtn');
+            const panel = document.getElementById('quickNavPanel');
+            const close = document.getElementById('quickNavClose');
+            const links = Array.from(document.querySelectorAll('.quick-nav-link'));
+            const firstLink = links[0];
+
+            function openPanel() {
+                panel.style.display = 'flex';
+                panel.setAttribute('aria-hidden', 'false');
+               
+                setTimeout(() => {
+                    panel.classList.add('show');
+                }, 10);
+                
+                btn.classList.add('pulse');
+                
+                if (firstLink) firstLink.focus();
+            }
+            
+            function closePanel() {
+                panel.classList.remove('show');
+                btn.classList.remove('pulse');
+                
+                setTimeout(() => {
+                    panel.style.display = 'none';
+                    panel.setAttribute('aria-hidden', 'true');
+                }, 300);
+                
+                btn.focus();
+            }
+
+            btn.addEventListener('click', function(e){
+                e.stopPropagation();
+                
+                btn.classList.add('clicked');
+                setTimeout(() => {
+                    btn.classList.remove('clicked');
+                }, 600);
+                
+                const isOpen = panel.style.display === 'flex';
+                if (isOpen) closePanel(); else openPanel();
+            });
+
+            close.addEventListener('click', function(e){ 
+                e.stopPropagation(); 
+                closePanel(); 
+            });
+
+            document.addEventListener('click', function(e){
+                const searchInput = document.getElementById('searchInput');
+                if (!panel.contains(e.target) && e.target !== btn && e.target !== searchInput && !searchInput.contains(e.target)) {
+                    closePanel();
+                }
+            });
+
+            document.addEventListener('keydown', function(e){
+                if (e.key === 'Escape' || e.key === 'Esc') {
+                    if (panel.style.display === 'flex') closePanel();
+                }
+            });
+
+            window.addEventListener('resize', function(){ 
+                closePanel(); 
+            });
+
+            links.forEach(link => {
+                link.addEventListener('click', function(e){
+                    closePanel();
+                });
+            });
+        })();
+
+        // Funcionalidade de busca
+        (function(){
+            const searchInput = document.getElementById('searchInput');
+            const recipesGrid = document.getElementById('recipesGrid');
+            const recipeCards = Array.from(document.querySelectorAll('.recipe-card'));
+            const searchResultsInfo = document.getElementById('searchResultsInfo');
+            const noResults = document.getElementById('noResults');
+
+            function normalizeText(text) {
+                return text.toLowerCase()
+                    .normalize('NFD')
+                    .replace(/[\u0300-\u036f]/g, '');
+            }
+
+            function searchRecipes(query) {
+                const normalizedQuery = normalizeText(query);
+                let visibleCount = 0;
+
+                recipeCards.forEach(card => {
+                    const recipeTitle = card.querySelector('.recipe-header h3').textContent;
+                    const ingredientsList = card.querySelectorAll('.ingredients-list li');
+                    
+                    let ingredientsText = '';
+                    ingredientsList.forEach(li => {
+                        ingredientsText += li.textContent + ' ';
+                    });
+
+                    const searchableText = normalizeText(recipeTitle + ' ' + ingredientsText);
+                    const isMatch = searchableText.includes(normalizedQuery);
+
+                    if (isMatch) {
+                        card.classList.remove('hidden');
+                        visibleCount++;
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+
+                // Mostrar/ocultar informações de resultados
+                if (query.trim() === '') {
+                    searchResultsInfo.classList.add('hidden');
+                    noResults.classList.add('hidden');
+                } else {
+                    if (visibleCount === 0) {
+                        searchResultsInfo.classList.add('hidden');
+                        noResults.classList.remove('hidden');
+                    } else {
+                        searchResultsInfo.classList.remove('hidden');
+                        noResults.classList.add('hidden');
+                        searchResultsInfo.textContent = `${visibleCount} receita${visibleCount !== 1 ? 's' : ''} encontrada${visibleCount !== 1 ? 's' : ''}`;
+                    }
+                }
+            }
+
+            // Garantir que o input funcione corretamente
+            searchInput.addEventListener('focus', function(e) {
+                e.stopPropagation();
+                this.style.cursor = 'text';
+            });
+
+            searchInput.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.focus();
+            });
+
+            searchInput.addEventListener('input', function(e) {
+                e.stopPropagation();
+                const query = e.target.value;
+                searchRecipes(query);
+            });
+
+            // Limpar busca ao pressionar ESC
+            searchInput.addEventListener('keydown', function(e) {
+                e.stopPropagation();
+                if (e.key === 'Escape') {
+                    this.value = '';
+                    searchRecipes('');
+                    this.blur();
+                }
+            });
+
+            // Prevenir que outros eventos interfiram
+            searchInput.addEventListener('mousedown', function(e) {
+                e.stopPropagation();
+            });
+
+            searchInput.addEventListener('mouseup', function(e) {
+                e.stopPropagation();
+            });
+        })();
+    </script>
+</body>
+</html>
+
