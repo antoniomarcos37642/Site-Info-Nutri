@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Jogo mobile 2D inspirado no Dino: pule obstáculos, desvie e faça a maior pontuação.">
+    <title>Corredor Dino 2D - Jogo Mobile</title>
+    <link rel="stylesheet" href="jogo-dino.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <main class="game-page">
+        <section class="game-shell" aria-label="Jogo Corredor Dino 2D">
+            <div class="top-bar">
+                <a class="back-link" href="nutricao.html" aria-label="Voltar ao site">
+                    <i class="fas fa-arrow-left"></i>
+                    Voltar
+                </a>
+                <div class="brand">
+                    <span class="brand-icon" aria-hidden="true">🦖</span>
+                    <div>
+                        <p>Jogo Mobile</p>
+                        <h1>Corredor Dino 2D</h1>
+                    </div>
+                </div>
+                <button class="sound-toggle" id="soundToggle" type="button" aria-label="Ativar ou desativar som">
+                    <i class="fas fa-volume-high" aria-hidden="true"></i>
+                </button>
+            </div>
+
+            <div class="score-board" aria-live="polite">
+                <div class="score-card">
+                    <span>Pontos</span>
+                    <strong id="scoreValue">0</strong>
+                </div>
+                <div class="score-card">
+                    <span>Recorde</span>
+                    <strong id="bestScoreValue">0</strong>
+                </div>
+                <div class="score-card">
+                    <span>Velocidade</span>
+                    <strong id="speedValue">1x</strong>
+                </div>
+            </div>
+
+            <div class="canvas-wrap">
+                <canvas id="gameCanvas" width="900" height="420" aria-label="Area do jogo"></canvas>
+
+                <div class="overlay show" id="startOverlay">
+                    <div class="overlay-card">
+                        <span class="dino-badge" aria-hidden="true">🦖</span>
+                        <h2>Toque para começar</h2>
+                        <p>Pule os cactos, abaixe dos pássaros e tente bater seu recorde.</p>
+                        <button class="primary-action" id="startButton" type="button">Começar jogo</button>
+                    </div>
+                </div>
+
+                <div class="overlay" id="gameOverOverlay">
+                    <div class="overlay-card">
+                        <span class="dino-badge danger" aria-hidden="true">💥</span>
+                        <h2>Fim de jogo</h2>
+                        <p id="finalScoreText">Sua pontuação foi 0.</p>
+                        <button class="primary-action" id="restartButton" type="button">Jogar novamente</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mobile-controls" aria-label="Controles do jogo">
+                <button class="control-button jump-button" id="jumpButton" type="button">
+                    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+                    Pular
+                </button>
+                <button class="control-button duck-button" id="duckButton" type="button">
+                    <i class="fas fa-arrow-down" aria-hidden="true"></i>
+                    Abaixar
+                </button>
+            </div>
+
+            <div class="tips">
+                <span><i class="fas fa-mobile-screen-button" aria-hidden="true"></i> Toque na tela para pular</span>
+                <span><i class="fas fa-keyboard" aria-hidden="true"></i> Espaço pula, seta baixo abaixa</span>
+            </div>
+        </section>
+    </main>
+
+    <script src="jogo-dino.js"></script>
+</body>
+</html>
